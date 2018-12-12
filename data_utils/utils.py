@@ -1,5 +1,6 @@
 import torch
 import pandas as pd
+import torchvision
 
 def features_dataset(features_pickle_path, train=True):
     """

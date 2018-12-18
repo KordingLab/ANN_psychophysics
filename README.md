@@ -6,12 +6,13 @@ Do deep neural networks have visual illusions?
 
 0. Make sure you're in the `py34` environment on bleen. (Get there with `source activate py34`). 
 0. Select an open gpu. (Run `nvidia-smi`, see which cards are unused, and change the `CUDA_VISIBLE_DEVICES` flag in the top of `train-decoder.py` to match).
+0. Edit the `savename` to not overwrite a previous run. (In the future we can set this as a flag using `argparse`)
 
 ### Performance log
 
 
-| Date      | Orientation Kernel | Layer number | Optimizer     | Other notes | Performance |
-|-----------|--------------------|--------------|---------------|-------------|-------------|
-| 12-15-18  | 30                 | 24           | Adam: lr=1e-5 |             | 0.020909    |
-|           |                    |              |               |             |             |
-|           |                    |              |               |             |             |
+| Date      | Orientation Kernel | Layer number | Optimizer     | savename                        | Other notes | Performance |
+|-----------|--------------------|--------------|---------------|---------------------------------|-------------|-------------|
+| 12-15-18  | 30                 | 24           | Adam: lr=1e-5 | trainedmodel_kernel_30_layer_24 |             | 0.020909    |
+|           |                    |              |               |                                 |             |             |
+|           |                    |              |               |                                 |             |             |

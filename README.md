@@ -9,7 +9,9 @@ Do deep neural networks have visual illusions?
 
 ### Performance log
 
-| Date | Orientation kernel | Layer Number | Optimizer | Other Notes | Final test performance |
-|------|------|-------|
-|   12-15-18   |   30 | 24 | Adam: `lr=1e-5` | | 0.020909     |
-|||||
+
+| Date      | Orientation Kernel | Layer number | Optimizer     | Other notes | Performance |
+|-----------|--------------------|--------------|---------------|-------------|-------------|
+| 12-15-18  | 30                 | 24           | Adam: lr=1e-5 |             | 0.020909    |
+|           |                    |              |               |             |             |
+|           |                    |              |               |             |             |

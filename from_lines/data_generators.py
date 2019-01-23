@@ -42,17 +42,17 @@ def create_input_and_target(filts, halfwidth = 2):
     angle = np.random.uniform(-np.pi, np.pi)
     centerloc = np.random.randint(0, 224, 2)
 
-    starter = np.zeros((224 * 4, 224 * 4))
+    starter = np.zeros((3,224 * 4, 224 * 4))
     x = np.cos(angle)
     y = np.sin(angle)
 
     # start with horizontal bar at center
     starter[:, (112 * 4 - halfwidth):(112 * 4 + halfwidth)] = 1
     # Rotate it
-    im = rotate(starter, -angle * 180 / np.pi, axes=(0,1), reshape=False)
+    im = rotate(starter, -angle * 180 / np.pi, axes=(1,2), reshape=False)
     im = im[224 + centerloc[0]:224 * 2 + centerloc[0], 224 + centerloc[1]:224 * 2 + centerloc[1]]
 
-    orientation_image  = get_orientation_map(im,filts)
+    orientation_image  = get_orientation_map(im[0],filts)
 
     return torch.tensor(im), torch.tensor(orientation_image)
 

@@ -14,16 +14,30 @@ filts = get_quadratures(KERNEL_SIZE)
 
 ### define the network: pull from a conv2d layer of the pretrained vgg network and train on top of that
 
-vgg_chopped = VGG_chopped(4)
+vgg_chopped = VGG_chopped(9)
 
 ### on an long while loop, we create inputs and use them to train the top of the network
 
-while 1:
+if 1:
     inputs, targets  = batch_inputs(filts)
     print(inputs.size())
 
     intermediates = vgg_chopped(inputs)
+    vgg_chopped = VGG_chopped(16)
+    inputs, targets  = batch_inputs(filts)
+    print(inputs.size())
 
+    intermediates = vgg_chopped(inputs)
+    vgg_chopped = VGG_chopped(23)
+    inputs, targets  = batch_inputs(filts)
+    print(inputs.size())
+
+    intermediates = vgg_chopped(inputs)
+    vgg_chopped = VGG_chopped(30)
+    inputs, targets  = batch_inputs(filts)
+    print(inputs.size())
+
+    intermediates = vgg_chopped(inputs)
 
 # params_to_update = model_ft.parameters()
 # print("Params to learn:")

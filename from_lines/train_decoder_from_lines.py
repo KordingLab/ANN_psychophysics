@@ -1,7 +1,7 @@
 ### Import things
 import torch
-from .decoder import VGG_chopped
-from .data_generators import batch_inputs, get_quadratures
+from decoder import VGG_chopped
+from data_generators import batch_inputs, get_quadratures
 
 ### define methods in torch to create the input data
 KERNEL_SIZE = 15

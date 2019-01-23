@@ -15,7 +15,7 @@ class VGG_chopped(torch.nn.Module):
 
         self.features = torch.nn.Sequential(*features).eval()
         self.layer = layer
-        maxpool_indices = [ 5, 9, 16, 23, 30]
+        maxpool_indices = [ 4, 9, 16, 23, 30]
         assert layer in maxpool_indices
 
         # freeze for training

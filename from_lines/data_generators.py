@@ -54,7 +54,7 @@ def create_input_and_target(filts, halfwidth = 2):
 
     orientation_image  = get_orientation_map(im[0],filts)
 
-    return torch.tensor(im), torch.tensor(orientation_image)
+    return torch.tensor(im, dtype = torch.float), torch.tensor(orientation_image, dtype = torch.float)
 
 
 

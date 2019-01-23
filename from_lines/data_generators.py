@@ -50,7 +50,7 @@ def create_input_and_target(filts, halfwidth = 2):
     starter[:, (112 * 4 - halfwidth):(112 * 4 + halfwidth)] = 1
     # Rotate it
     im = rotate(starter, -angle * 180 / np.pi, axes=(1,2), reshape=False)
-    im = im[224 + centerloc[0]:224 * 2 + centerloc[0], 224 + centerloc[1]:224 * 2 + centerloc[1]]
+    im = im[:,224 + centerloc[0]:224 * 2 + centerloc[0], 224 + centerloc[1]:224 * 2 + centerloc[1]]
 
     orientation_image  = get_orientation_map(im[0],filts)
 

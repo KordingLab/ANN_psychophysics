@@ -9,7 +9,7 @@ savename = "Linear_decoder_plain_lines"
 
 ### define methods to load the data
 BATCH_SIZE = 64
-EPOCHS = 5
+EPOCHS = 1
 samples = data_iterator('/home/abenjamin/DNN_illusions/fast_data/features/straight_lines/lines.h5', BATCH_SIZE)
 targets = data_iterator('/home/abenjamin/DNN_illusions/fast_data/features/straight_lines/lines_targets.h5', BATCH_SIZE)
 
@@ -26,7 +26,7 @@ for name,param in vgg_and_decoder.named_parameters():
     if param.requires_grad == True:
         params_to_update.append(param)
 
-optimizer = torch.optim.Adam(params_to_update, 1e-5,
+optimizer = torch.optim.Adam(params_to_update, 1e-4,
                              weight_decay=1e-4)
 
 criterion = torch.nn.MSELoss()
@@ -55,16 +55,21 @@ for epoch in range(EPOCHS):
 
         optimizer.step()
 
+        if batch_idx * BATCH_SIZE > 10000:
+            break
+
         if (batch_idx > log_interval) and (batch_idx % log_interval == 0):
             train_loss /= i / BATCH_SIZE
             i = 0
 
             train_accuracy.append(train_loss)
 
-            print('Epoch: {} Train Loss: {:.6f} '.format(
-                epoch + 1,
+            print('Epoch: {} Batch #: {} Train Loss: {:.6f} '.format(
+                epoch + 1, batch_idx,
                 train_loss))
             train_loss = 0
+
+
 
 
 ### finally we save the network for later

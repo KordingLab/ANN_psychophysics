@@ -38,31 +38,37 @@ class OrientationDecoder(torch.nn.Module):
         # load the pretrained network
         self.vgg_chopped = VGG_chopped(layer)
 
+
+        # see https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md and
+        # https://distill.pub/2016/deconv-checkerboard/ to think about the deconv
+
+        # Currently a single linear layer
         if self.layer == 4:
             # starts [batch_size, 64, 112, 112]
             self.deconv = torch.nn.Sequential(
-
+                  #  112 x stride - 2 x padding + kernel + output_pad
+                torch.nn.ConvTranspose2d(in_channels=64, out_channels=2, kernel_size=4, stride=2, padding=2),
             )
 
         elif self.layer == 9:
             # starts [64, 128, 56, 56]
             self.deconv = torch.nn.Sequential(
-
+                torch.nn.ConvTranspose2d(in_channels=128, out_channels=2, kernel_size=4, stride=4, padding=2),
             )
         elif self.layer == 16:
             # starts [64, 256, 28, 28]
             self.deconv = torch.nn.Sequential(
-
+                torch.nn.ConvTranspose2d(in_channels=256, out_channels=2, kernel_size=8, stride=8, padding=4),
             )
         elif self.layer == 23:
             # starts [64, 512, 14, 14]
             self.deconv = torch.nn.Sequential(
-
+                torch.nn.ConvTranspose2d(in_channels=256, out_channels=2, kernel_size=16, stride=16, padding=8),
             )
         elif self.layer == 30:
             # starts [64, 512, 7, 7]
             self.deconv = torch.nn.Sequential(
-
+                torch.nn.ConvTranspose2d(in_channels=512, out_channels=2, kernel_size=32, stride=32, padding=16)
             )
         else:
             NotImplementedError("Impossible logic")
@@ -70,8 +76,6 @@ class OrientationDecoder(torch.nn.Module):
     def forward(self, x):
         x = self.vgg_chopped(x)
         x = self.deconv(x)
-
-
 
         assert x.size()[1:] == torch.Size([2, 224,224])
 

@@ -1,4 +1,4 @@
-from data_generators import create_input_and_target, get_quadratures
+from data_generators import single_black_line, get_quadratures
 import pandas as pd
 import numpy as np
 
@@ -10,7 +10,7 @@ all_inputs = list()
 all_targets = list()
 n_samples = 10000
 for n in range(n_samples):
-    input, target  = create_input_and_target(filts)
+    input, target  = single_black_line(filts)
     all_inputs.append(input.reshape(-1))
     all_targets.append(target.reshape(-1))
     print(n)

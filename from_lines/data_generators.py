@@ -4,18 +4,13 @@ from scipy.signal import convolve2d
 from scipy.ndimage import rotate
 
 
-#
-# # Use a fixed kernel size. Precomputed for speed
-# KERNEL_SIZE = 15
-# filts = get_quadratures(KERNEL_SIZE)
-
-
 
 ### define methods in torch to create the input data
 
 def batch_inputs(filts, batchsize = 64):
     """Wraps the construction of the oriented lines, batches them, and returns pytorch tensors"""
-    inputs,targets = list(zip(*[create_input_and_target(filts) for _ in range(batchsize)]))
+    inputs,targets = list(zip(*[[torch.tensor(im, dtype = torch.float) for im in single_black_line(filts)]
+                                       for _ in range(batchsize)]))
 
     inputs = torch.stack(inputs)
     targets = torch.stack(targets)
@@ -24,8 +19,45 @@ def batch_inputs(filts, batchsize = 64):
     return inputs,targets
 
 
+def _add_random_line(im):
+    """Takes a 3x224x224 image and adds to it a random blue oriented line"""
+    raise NotImplementedError("This will be a helper method for the `with_distractor` methods.")
 
-def create_input_and_target(filts, halfwidth = 2):
+
+def red_line_with_blue_distractors(filts, num_distractors = 10):
+    """Routine for creating input and target images containing a straight red oriented line and with
+    blue thin distracting lines the background. The `orientation image` target contains the orientation
+    of just the red line, not the blue lines.
+
+    Input: filts: an array of 4 gabor filters, precomputed for speed. Result of `get_quadratures`
+    =====  halfwidth = width of the line in the returned array
+    Returns a tuple:
+    a) A numpy array (224,224) containing a single straight red line with a random angle and position,
+                                with many blue random lines in the background
+    b) A numpy array (2,224,224) containing the orientation vector at every point in the above array
+            ** for just the red line **.
+            The first channel is "x" and the second channel is "y".
+            Note that the angle at each point is np.arctan2(y,x)"""
+    raise NotImplementedError("")
+
+
+
+def curved_black_line(filts):
+    """Routine for creating input and target images containing a curved black line.
+
+    Input: filts: an array of 4 gabor filters, precomputed for speed. Result of `get_quadratures`
+    =====  halfwidth = width of the line in the returned array
+
+    Returns a tuple:
+    =====  a) A numpy array (224,224) containing a single curved line with a random curvature and position
+           b) A numpy array (2,224,224) containing the orientation vector at every point in the above array.
+            The first channel is "x" and the second channel is "y".
+            Note that the angle at each point is np.arctan2(y,x)"""
+    raise NotImplementedError("")
+
+
+
+def single_black_line(filts, halfwidth = 1):
     """
     Routine for creating input and target images containing a straight oriented line
 
@@ -55,9 +87,6 @@ def create_input_and_target(filts, halfwidth = 2):
     orientation_image  = get_orientation_map(im[0],filts)
 
     return im,orientation_image
-    #return torch.tensor(im, dtype = torch.float), torch.tensor(orientation_image, dtype = torch.float)
-
-
 
 
 

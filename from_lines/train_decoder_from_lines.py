@@ -37,7 +37,7 @@ vgg_and_decoder.train()
 
 train_loss = 0
 i = 0
-log_interval = 50
+log_interval = 10
 for epoch in range(EPOCHS):
     for batch_idx, (feats, orients) in enumerate(zip(samples, targets)):
 
@@ -61,7 +61,7 @@ for epoch in range(EPOCHS):
 
             train_accuracy.append(train_loss)
 
-            print('Epoch: {} Train Loss: {:.6f} || Test Loss: {:.6f}  '.format(
+            print('Epoch: {} Train Loss: {:.6f} '.format(
                 epoch + 1,
                 train_loss))
             train_loss = 0

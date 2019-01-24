@@ -45,13 +45,13 @@ class OrientationDecoder(torch.nn.Module):
             # starts [batch_size, 64, 112, 112]
             self.deconv = torch.nn.Sequential(
                   #  112 x stride - 2 x padding + kernel + output_pad
-                torch.nn.ConvTranspose2d(in_channels=64, out_channels=2, kernel_size=4, stride=2, padding=2),
+                torch.nn.ConvTranspose2d(in_channels=64, out_channels=2, kernel_size=4, stride=2, padding=1),
             )
 
         elif self.layer == 9:
             # starts [64, 128, 56, 56]
             self.deconv = torch.nn.Sequential(
-                torch.nn.ConvTranspose2d(in_channels=128, out_channels=2, kernel_size=4, stride=4, padding=2),
+                torch.nn.ConvTranspose2d(in_channels=128, out_channels=2, kernel_size=4, stride=4, padding=1),
             )
         elif self.layer == 16:
             # starts [64, 256, 28, 28]
@@ -75,6 +75,9 @@ class OrientationDecoder(torch.nn.Module):
         x = self.vgg_chopped(x)
         x = self.deconv(x)
 
-        assert x.size()[1:] == torch.Size([2, 224,224])
+        try:
+            assert x.size()[1:] == torch.Size([2, 224,224])
+        except AssertionError:
+            print(x.size());raise
 
         return x

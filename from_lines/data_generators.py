@@ -32,7 +32,7 @@ def red_line_with_blue_distractors(filts, num_distractors = 10):
     Input: filts: an array of 4 gabor filters, precomputed for speed. Result of `get_quadratures`
     =====  halfwidth = width of the line in the returned array
     Returns a tuple:
-    a) A numpy array (224,224) containing a single straight red line with a random angle and position,
+    a) A numpy array (3, 224,224) containing a single straight red line with a random angle and position,
                                 with many blue random lines in the background
     b) A numpy array (2,224,224) containing the orientation vector at every point in the above array
             ** for just the red line **.
@@ -49,7 +49,7 @@ def curved_black_line(filts):
     =====  halfwidth = width of the line in the returned array
 
     Returns a tuple:
-    =====  a) A numpy array (224,224) containing a single curved line with a random curvature and position
+    =====  a) A numpy array (3, 224,224) containing a single curved line with a random curvature and position
            b) A numpy array (2,224,224) containing the orientation vector at every point in the above array.
             The first channel is "x" and the second channel is "y".
             Note that the angle at each point is np.arctan2(y,x)"""
@@ -64,7 +64,7 @@ def single_black_line(filts, halfwidth = 1):
     Input: filts: an array of 4 gabor filters, precomputed for speed. Result of `get_quadratures`
     =====  halfwidth = width of the line in the returned array
     Returns a tuple:
-    a) A numpy array (224,224) containing a single straight line with a random angle and position
+    a) A numpy array (3, 224,224) containing a single straight line with a random angle and position
     b) A numpy array (2,224,224) containing the orientation vector at every point in the above array.
             The first channel is "x" and the second channel is "y".
             Note that the angle at each point is np.arctan2(y,x)

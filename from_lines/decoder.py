@@ -42,7 +42,7 @@ class OrientationDecoder(torch.nn.Module):
 
         # Currently a single linear layer
         if self.layer == 4:
-            # starts [batch_size, 64, 112, 112]
+            # starts [64, 64, 112, 112]
             self.deconv = torch.nn.Sequential(
                   #  112 x stride - 2 x padding + kernel + output_pad
                 torch.nn.ConvTranspose2d(in_channels=64, out_channels=2, kernel_size=4, stride=2, padding=1),

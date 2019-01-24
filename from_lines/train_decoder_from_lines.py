@@ -75,7 +75,7 @@ for epoch in range(EPOCHS):
 ### finally we save the network for later
 
 import pickle
-pickle.dump((train_accuracy,
-            open("/home/abenjamin/DNN_illusions/data/models/{}.traintest".format(savename), "wb")))
+pickle.dump(train_accuracy,
+            open("/home/abenjamin/DNN_illusions/data/models/{}.traintest".format(savename), "wb"))
 torch.save(vgg_and_decoder.state_dict(), "/home/abenjamin/DNN_illusions/data/models/{}.pt".format(savename))
 print("Saved")

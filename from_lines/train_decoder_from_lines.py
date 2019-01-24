@@ -39,7 +39,7 @@ train_loss = 0
 i = 0
 log_interval = 50
 for epoch in range(EPOCHS):
-    for batch_idx, ((feats, _), orients) in enumerate(zip(samples, targets)):
+    for batch_idx, (feats, orients) in enumerate(zip(samples, targets)):
 
         data, target = feats.cuda(), orients.cuda()
         data, target = Variable(data), Variable(target)

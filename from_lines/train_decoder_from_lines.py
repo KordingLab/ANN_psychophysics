@@ -14,6 +14,8 @@ if __name__ == '__main__':
                         type=str)
     parser.add_argument("layer", help="which layer of VGG the model was trained to decode from",
                         type=int)
+    parser.add_argument("--epochs", help="how many epochs",
+                        type=int, default=5)
     parser.add_argument("--image_directory", type = str,
                         default='/home/abenjamin/DNN_illusions/fast_data/features/straight_lines/',
                         help="""Path to the folder in which we store the `lines.h5` and `lines_targets.h5` files.
@@ -29,7 +31,7 @@ if __name__ == '__main__':
 
     ### define methods to load the data
     BATCH_SIZE = 64
-    EPOCHS = 5
+    EPOCHS = args.epochs
     samples = data_iterator(args.image_directory+'lines.h5', BATCH_SIZE)
     targets = data_iterator(args.image_directory+'lines_targets.h5', BATCH_SIZE)
 

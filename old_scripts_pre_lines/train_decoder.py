@@ -1,12 +1,14 @@
 
-import torch
 import os
+
+import torch
+
 os.environ["CUDA_VISIBLE_DEVICES"]="1"
 import pickle
 
-from model import Decoder
-from data_utils import features_dataset, orientations_iterator
-from train_utils import train
+from old_scripts_pre_lines.model import Decoder
+from old_scripts_pre_lines.data_utils import features_dataset, orientations_iterator
+from old_scripts_pre_lines.train_utils import train
 
 
 # orientation kernel size

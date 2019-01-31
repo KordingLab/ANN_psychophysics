@@ -44,31 +44,33 @@ class OrientationDecoder(torch.nn.Module):
         if self.layer == 4:
             # starts [64, 64, 112, 112]
             self.deconv = torch.nn.Sequential(
-                torch.nn.Upsample(scale_factor=2),
-                  #  112 x stride - 2 x padding + kernel + output_pad
-                torch.nn.ConvTranspose2d(in_channels=64, out_channels=2, kernel_size=2, stride=1, padding=1),
+                torch.nn.Upsample(scale_factor=2, mode='bilinear'),
+                #-kernel+1+padding*2
+                torch.nn.Conv2d(in_channels=64, out_channels=2, kernel_size=3, stride=1, padding=1),
             )
 
         elif self.layer == 9:
             # starts [64, 128, 56, 56]
             self.deconv = torch.nn.Sequential(
-                torch.nn.ConvTranspose2d(in_channels=128, out_channels=2, kernel_size=4, stride=4, padding=0,output_padding=0),
+                torch.nn.Upsample(scale_factor=4, mode='bilinear'),
+                torch.nn.Conv2d(in_channels=128, out_channels=2, kernel_size=5, stride=1, padding=2),
             )
         elif self.layer == 16:
             # starts [64, 256, 28, 28]
             self.deconv = torch.nn.Sequential(
-                torch.nn.ConvTranspose2d(in_channels=256, out_channels=2, kernel_size=8, stride=8, padding=0),
+                torch.nn.Upsample(scale_factor=8, mode='bilinear'),
+                torch.nn.Conv2d(in_channels=128, out_channels=2, kernel_size=9, stride=1, padding=4),
             )
         elif self.layer == 23:
             # starts [64, 512, 14, 14]
             self.deconv = torch.nn.Sequential(
-                torch.nn.ConvTranspose2d(in_channels=512, out_channels=2, kernel_size=16, stride=16, padding=0),
-            )
+                torch.nn.Upsample(scale_factor=16, mode='bilinear'),
+                torch.nn.Conv2d(in_channels=128, out_channels=2, kernel_size=17, stride=1, padding=8),            )
         elif self.layer == 30:
             # starts [64, 512, 7, 7]
             self.deconv = torch.nn.Sequential(
-                torch.nn.ConvTranspose2d(in_channels=512, out_channels=2, kernel_size=32, stride=32, padding=0)
-            )
+                torch.nn.Upsample(scale_factor=32, mode='bilinear'),
+                torch.nn.Conv2d(in_channels=128, out_channels=2, kernel_size=33, stride=1, padding=16),            )
         else:
             NotImplementedError("Impossible logic")
 

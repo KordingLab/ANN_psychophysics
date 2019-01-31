@@ -52,7 +52,7 @@ class OrientationDecoder(torch.nn.Module):
         elif self.layer == 9:
             # starts [64, 128, 56, 56]
             self.deconv = torch.nn.Sequential(
-                torch.nn.ConvTranspose2d(in_channels=128, out_channels=2, kernel_size=4, stride=4, padding=0),
+                torch.nn.ConvTranspose2d(in_channels=128, out_channels=2, kernel_size=4, stride=4, padding=0,output_padding=0),
             )
         elif self.layer == 16:
             # starts [64, 256, 28, 28]

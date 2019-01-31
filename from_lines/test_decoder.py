@@ -2,6 +2,7 @@ import torch
 from torch.autograd import Variable
 
 import argparse
+import os
 from decoder import OrientationDecoder
 from data_loader_utils import data_iterator
 
@@ -12,7 +13,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-def pass_test_images(model, image_path):
+def pass_test_images(model, image_path, args):
     """This script loads a model, as specified by the path, tests some images, and displays the decoded images.
 
 
@@ -25,16 +26,18 @@ def pass_test_images(model, image_path):
     samples = data_iterator(image_path+'lines.h5', BATCH_SIZE)
 
     try:
-        targets = data_iterator(image_path+'lines_targets.h5', BATCH_SIZE)
+        targets = list(data_iterator(image_path+'lines_targets.h5', BATCH_SIZE))
     except:
         targets = [None] * BATCH_SIZE
 
     for batch_idx, feats in enumerate(samples):
-
+        if args.gpu:
+            feats = feats.cuda()
         data = Variable(feats)
 
         output = model(data).detach()
-
+        if args.gpu:
+            output = output.cpu()
         break
 
     # Right now we have three 4x_x224x224 tensors, and we want it in list of tuple form
@@ -135,11 +138,19 @@ if __name__ == '__main__':
                         default='/home/abenjamin/DNN_illusions/fast_data/features/straight_lines/',
                         help="""Path to the folder in which we store the `lines.h5` and `lines_targets.h5` files.
                              If lines_targets.h5 does not exist, we just plot the input and model output.""")
+    parser.add_argument('--no-cuda', action='store_true',
+                    help='Disable CUDA')
+    parser.add_argument("--card", help="which card to use",
+                        type=int, default =0 )
     args = parser.parse_args()
+    args.gpu = not args.no_cuda
+
+    os.environ["CUDA_VISIBLE_DEVICES"]=str(args.card)
 
     # note that right now the model is on the cpu
     model = load_model(args.model_path, args.layer)
-
-    images = pass_test_images(model, args.image_directory)
+    if args.gpu:
+        model = model.cuda()
+    images = pass_test_images(model, args.image_directory,args)
 
     save_and_visualize(images)

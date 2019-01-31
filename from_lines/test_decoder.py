@@ -24,15 +24,12 @@ def pass_test_images(model, image_path, args):
     BATCH_SIZE = 4
 
     samples = data_iterator(image_path+'lines.h5', BATCH_SIZE)
-    print("Loaded samples")
     try:
-        targets = list(data_iterator(image_path+'lines_targets.h5', BATCH_SIZE))
+        targets = next(data_iterator(image_path+'lines_targets.h5', BATCH_SIZE))
     except:
         targets = [None] * BATCH_SIZE
-    print("Loaded targets")
 
     for batch_idx, feats in enumerate(samples):
-        print("Batch",batch_idx)
         if args.gpu:
             feats = feats.cuda()
         data = Variable(feats)
@@ -40,9 +37,9 @@ def pass_test_images(model, image_path, args):
         output = model(data).detach()
         if args.gpu:
             output = output.cpu()
+            data = data.cpu()
         break
 
-    print("Done")
     # Right now we have three 4x_x224x224 tensors, and we want it in list of tuple form
     input_output_target = []
     for i in range(BATCH_SIZE):
@@ -68,22 +65,23 @@ def save_and_visualize(images):
 
         check_sizes(input, output)
 
-        plt.figure(figsize=(30, 10))
+        plt.figure(figsize=(15, 5))
         plt.subplot(131)
         plt.imshow(np.mean(input,axis=0))
         ax = plt.gca()
         ax.set_axis_off()
-        ax.title("Input")
+        ax.set_title("Input")
 
         plt.subplot(132)
         ax2 = show_orientation_image(output)
-        ax2.title("Decoded orientation")
+        ax2.set_title("Decoded orientation")
 
-        if target is not None:
+        try:#if target is not None:
             plt.subplot(133)
             ax3 = show_orientation_image(target)
-            ax3.title("Target orientation")
-
+            ax3.set_title("Target orientation")
+        except:
+            print("Error in plotting target")
         plt.tight_layout()
         plt.savefig("Decoded_test_image_{}.png".format(i))
         plt.show()
@@ -97,6 +95,7 @@ def check_sizes(input,output):
 
 def show_orientation_image(im):
     """Takes a 2x224x224 image and plots the 224x224 image with orientations"""
+    assert im.shape == (2,224,224)
     color_circle = np.ones((256, 3)) * 66
     color_circle[:, 1] = np.ones((256)) * 44
 
@@ -110,9 +109,6 @@ def show_orientation_image(im):
                    cmap=cm,
                    vmin=-np.pi,
                    vmax=np.pi)
-
-    magnitude = np.sqrt(im[0] ** 2 + im[1] ** 2)
-    magnitude /= np.max(magnitude)
 
     ax = plt.gca()
     ax.set_axis_off()

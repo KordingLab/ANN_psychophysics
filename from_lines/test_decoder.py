@@ -24,13 +24,15 @@ def pass_test_images(model, image_path, args):
     BATCH_SIZE = 4
 
     samples = data_iterator(image_path+'lines.h5', BATCH_SIZE)
-
+    print("Loaded samples")
     try:
         targets = list(data_iterator(image_path+'lines_targets.h5', BATCH_SIZE))
     except:
         targets = [None] * BATCH_SIZE
+    print("Loaded targets")
 
     for batch_idx, feats in enumerate(samples):
+        print("Batch",batch_idx)
         if args.gpu:
             feats = feats.cuda()
         data = Variable(feats)
@@ -40,6 +42,7 @@ def pass_test_images(model, image_path, args):
             output = output.cpu()
         break
 
+    print("Done")
     # Right now we have three 4x_x224x224 tensors, and we want it in list of tuple form
     input_output_target = []
     for i in range(BATCH_SIZE):

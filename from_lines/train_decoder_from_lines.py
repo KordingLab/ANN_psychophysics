@@ -9,7 +9,7 @@ savename = "Linear_decoder_plain_lines"
 
 ### define methods to load the data
 BATCH_SIZE = 64
-EPOCHS = 1
+EPOCHS = 5
 samples = data_iterator('/home/abenjamin/DNN_illusions/fast_data/features/straight_lines/lines.h5', BATCH_SIZE)
 targets = data_iterator('/home/abenjamin/DNN_illusions/fast_data/features/straight_lines/lines_targets.h5', BATCH_SIZE)
 

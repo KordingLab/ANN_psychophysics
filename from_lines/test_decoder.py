@@ -8,6 +8,7 @@ from data_loader_utils import data_iterator
 
 #visualize
 from matplotlib.colors import ListedColormap
+import matplotlib as mpl
 from colorspacious import cspace_convert
 import numpy as np
 from matplotlib import pyplot as plt
@@ -92,10 +93,7 @@ def check_sizes(input,output):
     assert input.shape == (3,224,224)
     assert output.shape == (2, 224, 224)
 
-
-def show_orientation_image(im):
-    """Takes a 2x224x224 image and plots the 224x224 image with orientations"""
-    assert im.shape == (2,224,224)
+def get_uniform_colormap():
     color_circle = np.ones((256, 3)) * 66
     color_circle[:, 1] = np.ones((256)) * 44
 
@@ -103,6 +101,13 @@ def show_orientation_image(im):
 
     color_circle_rgb = cspace_convert(color_circle, "JCh", "sRGB1")
     cm = ListedColormap(color_circle_rgb)
+    return cm
+
+
+def show_orientation_image_legacy(im):
+    """Takes a 2x224x224 image and plots the 224x224 image with orientations"""
+    assert im.shape == (2,224,224)
+    cm = get_uniform_colormap()
 
     angle_image = np.arctan2(im[0], im[1], )
     a = plt.imshow(angle_image,
@@ -115,6 +120,35 @@ def show_orientation_image(im):
     cbar = plt.colorbar(a, aspect=10, fraction=.07)
     cbar.ax.set_ylabel('Phase [pi]')
 
+    return ax
+
+
+def show_orientation_image(orientation_image):
+    """Takes a 2x224x224 image, with the two channels corresponding to x and y values,
+    and returns a 224,224,3 image where we have converted to RGB, the hue of which
+    represents phase and the brightness represents magnitude."""
+
+    angle_image = np.arctan2(orientation_image[1], orientation_image[0], )/np.pi*180
+    magnitudes = np.max(np.sqrt(np.square(orientation_image[0])+orientation_image[1])*100,100)
+    color_image = 100*np.ones((224,224,3))
+    color_image[2] = angle_image
+    color_image[1] = magnitudes
+
+    color_image_rgb = cspace_convert(color_image, "JCh", "sRGB1")
+
+    cmap = get_uniform_colormap()
+
+    a = plt.imshow(angle_image,
+                   cmap=cmap,
+                   vmin=-np.pi,
+                   vmax=np.pi)
+
+    plt.imshow(color_image_rgb)
+
+    ax = plt.gca()
+    ax.set_axis_off()
+    cbar = plt.colorbar(a, aspect=10, fraction=.07)
+    cbar.ax.set_ylabel('Phase [pi]')
     return ax
 
 

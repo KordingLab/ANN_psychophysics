@@ -5,7 +5,9 @@ import argparse
 import os
 from decoder import OrientationDecoder
 from data_loader_utils import data_iterator
+from decoder_nonlinear import OrientationDecoder as OrientationDecoderNonlinear
 from decoder_upsample import OrientationDecoder as OrientationDecoderUpsample
+from decoder_upsample_nonlinear import OrientationDecoder as OrientationDecoderUpsampleNonlinear
 
 #visualize
 from matplotlib.colors import ListedColormap
@@ -154,13 +156,19 @@ def show_orientation_image(orientation_image):
 
 
 
-def load_model(path,upsample, layer = 5):
+def load_model(args):
     """Loads the VGG+decoder network trained and saved at path."""
-    if upsample:
-        model = OrientationDecoderUpsample(layer)
+    if args.upsample:
+        if args.nonlinear:
+            model = OrientationDecoderUpsampleNonlinear(args.layer)
+        else:
+            model = OrientationDecoderUpsample(args.layer)
     else:
-        model = OrientationDecoder(layer)
-    model.load_state_dict(torch.load(path))
+        if args.nonlinear:
+            model = OrientationDecoderNonlinear(args.layer)
+        else:
+            model = OrientationDecoder(args.layer)
+    model.load_state_dict(torch.load(args.model_path))
     model.eval()
     return model
 
@@ -180,14 +188,16 @@ if __name__ == '__main__':
     parser.add_argument("--card", help="which card to use",
                         type=int, default =0 )
     parser.add_argument('--upsample', action='store_true',
-                                help='Use the decoder in decoder_upsample')
+                                help='Use the decoder with upsampling')
+    parser.add_argument('--nonlinear', action='store_true',
+                        help='Use the decoder with nonlinear 2 layer network')
     args = parser.parse_args()
     args.gpu = not args.no_cuda
 
     os.environ["CUDA_VISIBLE_DEVICES"]=str(args.card)
 
     # note that right now the model is on the cpu
-    model = load_model(args.model_path, args.upsample,args.layer)
+    model = load_model(args)
     if args.gpu:
         model = model.cuda()
     images = pass_test_images(model, args.image_directory,args)

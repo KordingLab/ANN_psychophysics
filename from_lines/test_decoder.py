@@ -5,6 +5,7 @@ import argparse
 import os
 from decoder import OrientationDecoder
 from data_loader_utils import data_iterator
+from decoder_upsample import OrientationDecoder as OrientationDecoderUpsample
 
 #visualize
 from matplotlib.colors import ListedColormap
@@ -119,9 +120,12 @@ def show_orientation_image(im):
 
 
 
-def load_model(path, layer = 5):
+def load_model(path,upsample, layer = 5):
     """Loads the VGG+decoder network trained and saved at path."""
-    model = OrientationDecoder(layer)
+    if upsample:
+        model = OrientationDecoderUpsample(layer)
+    else:
+        model = OrientationDecoder(layer)
     model.load_state_dict(torch.load(path))
     model.eval()
     return model
@@ -141,13 +145,15 @@ if __name__ == '__main__':
                     help='Disable CUDA')
     parser.add_argument("--card", help="which card to use",
                         type=int, default =0 )
+    parser.add_argument('--upsample', action='store_true',
+                                help='Use the decoder in decoder_upsample')
     args = parser.parse_args()
     args.gpu = not args.no_cuda
 
     os.environ["CUDA_VISIBLE_DEVICES"]=str(args.card)
 
     # note that right now the model is on the cpu
-    model = load_model(args.model_path, args.layer)
+    model = load_model(args.model_path, args.upsample,args.layer)
     if args.gpu:
         model = model.cuda()
     images = pass_test_images(model, args.image_directory,args)

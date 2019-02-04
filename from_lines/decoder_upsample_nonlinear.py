@@ -66,25 +66,25 @@ class OrientationDecoder(torch.nn.Module):
                 torch.nn.Upsample(scale_factor=4),
                 torch.nn.Conv2d(in_channels=256, out_channels=8, kernel_size=9, stride=1, padding=4),
                 torch.nn.Tanh(),
-                torch.nn.Upsample(scale_factor=4),
+                torch.nn.Upsample(scale_factor=2),
                 torch.nn.Conv2d(in_channels=8, out_channels=2, kernel_size=5, stride=1, padding=2)
             )
         elif self.layer == 23:
             # starts [64, 512, 14, 14]
             self.deconv = torch.nn.Sequential(
-                torch.nn.Upsample(scale_factor=8),
-                torch.nn.Conv2d(in_channels=512, out_channels=8, kernel_size=17, stride=1, padding=8),
+                torch.nn.Upsample(scale_factor=4),
+                torch.nn.Conv2d(in_channels=512, out_channels=8, kernel_size=9, stride=1, padding=4),
                 torch.nn.Tanh(),
-                torch.nn.Upsample(scale_factor=8),
-                torch.nn.Conv2d(in_channels=8, out_channels=2, kernel_size=9, stride=1, padding=4)
+                torch.nn.Upsample(scale_factor=4),
+                torch.nn.Conv2d(in_channels=8, out_channels=2, kernel_size=5, stride=1, padding=2)
             )
         elif self.layer == 30:
             # starts [64, 512, 7, 7]
             self.deconv = torch.nn.Sequential(
-                torch.nn.Upsample(scale_factor=16),
-                torch.nn.Conv2d(in_channels=512, out_channels=8, kernel_size=33, stride=1, padding=16),
+                torch.nn.Upsample(scale_factor=8),
+                torch.nn.Conv2d(in_channels=512, out_channels=8, kernel_size=9, stride=1, padding=4),
                 torch.nn.Tanh(),
-                torch.nn.Upsample(scale_factor=16),
+                torch.nn.Upsample(scale_factor=4),
                 torch.nn.Conv2d(in_channels=8, out_channels=2, kernel_size=9, stride=1, padding=4)
             )
         else:

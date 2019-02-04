@@ -47,14 +47,14 @@ if __name__ == '__main__':
     ### define the network: pull from a conv2d layer of the pretrained vgg network and train on top of that
     if args.upsample:
         if args.nonlinear:
-            model = OrientationDecoderUpsampleNonlinear(args.layer).cuda()
+            vgg_and_decoder = OrientationDecoderUpsampleNonlinear(args.layer).cuda()
         else:
-            model = OrientationDecoderUpsample(args.layer).cuda()
+            vgg_and_decoder  = OrientationDecoderUpsample(args.layer).cuda()
     else:
         if args.nonlinear:
-            model = OrientationDecoderNonlinear(args.layer).cuda()
+            vgg_and_decoder = OrientationDecoderNonlinear(args.layer).cuda()
         else:
-            model = OrientationDecoder(args.layer).cuda()
+            vgg_and_decoder = OrientationDecoder(args.layer).cuda()
 
     params_to_update = []
     for name,param in vgg_and_decoder.named_parameters():

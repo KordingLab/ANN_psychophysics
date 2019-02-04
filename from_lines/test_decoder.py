@@ -142,15 +142,17 @@ def show_orientation_image(orientation_image, equiluminant = False):
     #drop the alpha channel
     rgb_image = rgba_image[:,:,:3]
 
-    #convert to hsl
-    hsv_image = mpl.colors.rgb_to_hsv(rgb_image)
+    if not equiluminant:
+        #convert to hsl
+        hsv_image = mpl.colors.rgb_to_hsv(rgb_image)
 
-    # make v channel the magnitude
-    magnitudes = np.maximum(np.minimum(np.nan_to_num(np.sqrt(np.square(orientation_image[0])
-                                                            +np.square(orientation_image[1]) )),1),0)
+        # make v channel the magnitude
+        magnitudes = np.maximum(np.minimum(np.nan_to_num(np.sqrt(np.square(orientation_image[0])
+                                                                +np.square(orientation_image[1]) )),1),0)
 
-    hsv_image[:,:,2] = magnitudes
-    rgb_image = mpl.colors.hsv_to_rgb(hsv_image)
+        hsv_image[:,:,2] = magnitudes
+        rgb_image = mpl.colors.hsv_to_rgb(hsv_image)
+
     # just to get the colorbar
     a = plt.imshow((angle_image-0.5)*np.pi,
                    cmap=cmap,

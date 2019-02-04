@@ -4,6 +4,9 @@ from torch.autograd import Variable
 from data_loader_utils import data_iterator
 from decoder_upsample import OrientationDecoder as OrientationDecoderUpsample
 from decoder import OrientationDecoder
+from decoder_nonlinear import OrientationDecoder as OrientationDecoderNonlinear
+from decoder_upsample_nonlinear import OrientationDecoder as OrientationDecoderUpsampleNonlinear
+
 import pickle
 import argparse
 import os
@@ -23,6 +26,8 @@ if __name__ == '__main__':
                              If lines_targets.h5 does not exist, we just plot the input and model output.""")
     parser.add_argument('--no-cuda', action='store_true',
                     help='Disable CUDA')
+    parser.add_argument('--nonlinear', action='store_true',
+                        help='Use the decoder with nonlinear 2 layer network')
     parser.add_argument('--upsample', action='store_true',
                     help='Use the decoder in decoder_upsample')
     parser.add_argument("--card", help="which card to use",
@@ -41,9 +46,15 @@ if __name__ == '__main__':
 
     ### define the network: pull from a conv2d layer of the pretrained vgg network and train on top of that
     if args.upsample:
-        vgg_and_decoder = OrientationDecoderUpsample(args.layer).cuda()
+        if args.nonlinear:
+            model = OrientationDecoderUpsampleNonlinear(args.layer).cuda()
+        else:
+            model = OrientationDecoderUpsample(args.layer).cuda()
     else:
-        vgg_and_decoder = OrientationDecoder(args.layer).cuda()
+        if args.nonlinear:
+            model = OrientationDecoderNonlinear(args.layer).cuda()
+        else:
+            model = OrientationDecoder(args.layer).cuda()
 
     params_to_update = []
     for name,param in vgg_and_decoder.named_parameters():

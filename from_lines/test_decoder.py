@@ -125,28 +125,39 @@ def show_orientation_image_legacy(im):
 
     return ax
 
-
-def show_orientation_image(orientation_image):
+def show_orientation_image(orientation_image, equiluminant = False):
     """Takes a 2x224x224 image, with the two channels corresponding to x and y values,
     and returns a 224,224,3 image where we have converted to RGB, the hue of which
-    represents phase and the brightness represents magnitude."""
+    represents phase and the brightness represents magnitude.
 
-    angle_image = np.arctan2(orientation_image[1], orientation_image[0], )/np.pi*180
-    magnitudes = np.max(np.sqrt(np.square(orientation_image[0])+orientation_image[1])*100,100)
-    color_image = 100*np.ones((224,224,3))
-    color_image[2] = angle_image
-    color_image[1] = magnitudes
+    This works by interpreting the x and y values at each pixel as giving the hue angle arctan2(y,x)
+    in CIECAM02 color space.
 
-    color_image_rgb = cspace_convert(color_image, "JCh", "sRGB1")
-
+    For dramatic effect, we also scale the brightness (L axis in CIELab) by the distance.
+    This can be turned off by setting `equiluminant = True`"""
     cmap = get_uniform_colormap()
 
-    a = plt.imshow(angle_image,
+    angle_image = np.arctan2(orientation_image[1], orientation_image[0], )/np.pi/2+0.5
+    rgba_image = cmap(angle_image)
+    #drop the alpha channel
+    rgb_image = rgba_image[:,:,:3]
+
+    #convert to hsl
+    hsv_image = mpl.colors.rgb_to_hsv(rgb_image)
+
+    # make v channel the magnitude
+    magnitudes = np.maximum(np.minimum(np.nan_to_num(np.sqrt(np.square(orientation_image[0])
+                                                            +np.square(orientation_image[1]) )),1),0)
+
+    hsv_image[:,:,2] = magnitudes
+    rgb_image = mpl.colors.hsv_to_rgb(hsv_image)
+    # just to get the colorbar
+    a = plt.imshow((angle_image-0.5)*np.pi,
                    cmap=cmap,
                    vmin=-np.pi,
                    vmax=np.pi)
 
-    plt.imshow(color_image_rgb)
+    plt.imshow(rgb_image)
 
     ax = plt.gca()
     ax.set_axis_off()

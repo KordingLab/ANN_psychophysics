@@ -345,7 +345,5 @@ def main():
     plt.imshow(empty_img[1])
     plt.show()
 
-    plt.imshow(empty_img[2])
-    plt.show()
 
 main()

@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Illusions.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Illusions.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/from_lines/data_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/data_generators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,7 +33,7 @@
           <file leaf-file-name="data_loader_utils.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/from_lines/data_loader_utils.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
+                <state relative-caret-position="340">
                   <caret line="20" column="24" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="24" />
                   <folding>
                     <element signature="e#0#19#0" expanded="true" />
@@ -65,9 +63,6 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="587">
                   <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
-                  <folding>
-                    <element signature="e#0#199#0" expanded="true" />
-                  </folding>
                 </state>
               </provider>
             </entry>
@@ -80,7 +75,7 @@
           <file leaf-file-name="data_generators.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="187">
+                <state relative-caret-position="289">
                   <caret line="17" column="19" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="19" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
@@ -93,11 +88,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="data_generators.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="data_generators.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="5746">
-                  <caret line="338" lean-forward="true" selection-start-line="338" selection-end-line="338" />
+                <state relative-caret-position="726">
+                  <caret line="345" column="14" lean-forward="true" selection-start-line="345" selection-start-column="14" selection-end-line="345" selection-end-column="14" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -105,7 +100,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="gitignore" pinned="false" current-in-tab="true">
+          <file leaf-file-name="gitignore" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/gitignore">
               <provider selected="true" editor-type-id="text-editor" />
             </entry>
@@ -138,13 +133,18 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/train_decoder.py" />
-        <option value="$PROJECT_DIR$/from_lines/data_generators.py" />
         <option value="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" />
+        <option value="$PROJECT_DIR$/from_lines/data_generators.py" />
       </list>
     </option>
   </component>
@@ -226,6 +226,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.data_generators" />
         <item itemvalue="Python.data_generators" />
       </list>
     </recent_temporary>
@@ -345,29 +346,23 @@
     <entry file="file://$PROJECT_DIR$/model/__init__.py" />
     <entry file="file://$PROJECT_DIR$/data_utils/utils.py" />
     <entry file="file://$PROJECT_DIR$/data_utils/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/from_lines/test_illusions on decoder.py" />
-    <entry file="file://$PROJECT_DIR$/from_lines/train_decoder_from_lines.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/visualize_decoded_orientations.ipynb" />
-    <entry file="file://$PROJECT_DIR$/from_lines/data_loader_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" column="24" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/from_lines/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
             <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/data_loader_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="24" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -381,28 +376,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/train_decoder_from_lines.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="587">
           <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#199#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5746">
-          <caret line="338" lean-forward="true" selection-start-line="338" selection-end-line="338" />
+        <state relative-caret-position="726">
+          <caret line="345" column="14" lean-forward="true" selection-start-line="345" selection-start-column="14" selection-end-line="345" selection-end-column="14" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

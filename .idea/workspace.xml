@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Illusions.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Illusions.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/from_lines/data_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/data_generators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/DNN_illusions$data_generators.coverage" NAME="data_generators Coverage Results" MODIFIED="1548951287362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/from_lines" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.5982641">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/from_lines/__init__.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <folding>
+                    <element signature="e#0#32#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="data_loader_utils.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/from_lines/data_loader_utils.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="323">
+                  <caret line="20" column="24" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="24" />
+                  <folding>
+                    <element signature="e#0#19#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="decoder.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/from_lines/decoder.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <folding>
+                    <element signature="e#0#35#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="test_decoder.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file leaf-file-name="gen_and_save_lines.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="587">
+                  <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
+                  <folding>
+                    <element signature="e#0#199#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="train_decoder_from_lines.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/from_lines/train_decoder_from_lines.py">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file leaf-file-name="data_generators.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="187">
+                  <caret line="17" column="19" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="19" />
+                  <folding>
+                    <element signature="e#0#12#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="data_generators.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="5746">
+                  <caret line="338" lean-forward="true" selection-start-line="338" selection-end-line="338" />
+                  <folding>
+                    <element signature="e#0#12#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="gitignore" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/gitignore">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>read_hdf</find>
+      <find>features_data_train</find>
+      <find>train</find>
+      <find>relu</find>
+      <find>blue</find>
+      <find>r</find>
+      <find>randomint</find>
+      <find>pi</find>
+      <find>single_black_line</find>
+      <find>.h5</find>
+      <find>red</find>
+      <find>get_orientation_map</find>
+      <find>add_random_line</find>
+      <find>add</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>randint</replace>
+      <replace>draw_random_line</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/train_decoder.py" />
+        <option value="$PROJECT_DIR$/from_lines/data_generators.py" />
+        <option value="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="2768" />
+    <option name="y" value="-20" />
+    <option name="width" value="1229" />
+    <option name="height" value="684" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="DNN_illusions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DNN_illusions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DNN_illusions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DNN_illusions" type="462c0819:PsiDirectoryNode" />
+              <item name="from_lines" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="data_generators" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Illusions" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/from_lines" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/from_lines/data_generators.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.data_generators" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="" />
+      <created>1546976909668</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1546976909668</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4275862" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15989584" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/train_decoder_from_lines.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1309">
+          <caret line="77" column="21" lean-forward="true" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train_decoder.py" />
+    <entry file="file://$PROJECT_DIR$/train_utils/train.py" />
+    <entry file="file://$PROJECT_DIR$/model/Decoder.py" />
+    <entry file="file://$PROJECT_DIR$/model/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/data_utils/utils.py" />
+    <entry file="file://$PROJECT_DIR$/data_utils/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train_decoder.py" />
+    <entry file="file://$PROJECT_DIR$/train_utils/train.py" />
+    <entry file="file://$PROJECT_DIR$/model/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/data_utils/utils.py" />
+    <entry file="file://$PROJECT_DIR$/data_utils/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/model/Decoder.py" />
+    <entry file="file://$PROJECT_DIR$/train_decoder.py" />
+    <entry file="file://$PROJECT_DIR$/train_utils/train.py" />
+    <entry file="file://$PROJECT_DIR$/model/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/data_utils/utils.py" />
+    <entry file="file://$PROJECT_DIR$/model/Decoder.py" />
+    <entry file="file://$PROJECT_DIR$/train_decoder.py" />
+    <entry file="file://$PROJECT_DIR$/model/Decoder.py" />
+    <entry file="file://$PROJECT_DIR$/train_utils/train.py" />
+    <entry file="file://$PROJECT_DIR$/model/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/data_utils/utils.py" />
+    <entry file="file://$PROJECT_DIR$/train_decoder.py" />
+    <entry file="file://$PROJECT_DIR$/model/Decoder.py" />
+    <entry file="file://$PROJECT_DIR$/train_utils/train.py" />
+    <entry file="file://$PROJECT_DIR$/model/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/data_utils/utils.py" />
+    <entry file="file://$PROJECT_DIR$/train_decoder.py" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="8" selection-start-line="8" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train_utils/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/train_decoder.py" />
+    <entry file="file://$PROJECT_DIR$/train_utils/train.py" />
+    <entry file="file://$PROJECT_DIR$/model/Decoder.py" />
+    <entry file="file://$PROJECT_DIR$/Raw/get_illusions_features_ab_raw.py" />
+    <entry file="file://$PROJECT_DIR$/model/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/data_utils/utils.py" />
+    <entry file="file://$PROJECT_DIR$/data_utils/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/test_illusions on decoder.py" />
+    <entry file="file://$PROJECT_DIR$/from_lines/train_decoder_from_lines.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualize_decoded_orientations.ipynb" />
+    <entry file="file://$PROJECT_DIR$/from_lines/data_loader_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="20" column="24" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/decoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="587">
+          <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#199#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5746">
+          <caret line="338" lean-forward="true" selection-start-line="338" selection-end-line="338" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+</project>

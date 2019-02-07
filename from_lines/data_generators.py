@@ -2,6 +2,9 @@ import torch
 import numpy as np
 from scipy.signal import convolve2d
 from scipy.ndimage import rotate
+from skimage.draw import (line_aa, line, bezier_curve,polygon_perimeter, polygon,
+                          ellipse, ellipse_perimeter)
+import matplotlib.pyplot as plt
 
 
 
@@ -19,10 +22,54 @@ def batch_inputs(filts, batchsize = 64):
     return inputs,targets
 
 
-def _add_random_line(im):
-    """Takes a 3x224x224 image and adds to it a random blue oriented line"""
-    raise NotImplementedError("This will be a helper method for the `with_distractor` methods.")
+def draw_random_line(im):
+    """Takes a 3x224x224 image and adds to it a random oriented line"""
 
+    r0 = np.random.randint(0, high=224)
+    c0 = np.random.randint(0, high=224)
+
+    r1 = np.random.randint(0, high=224)
+    c1 = np.random.randint(0, high=224)
+
+    rr, cc = line(r0, c0, r1, c1)
+
+    im[:, rr,cc] = 255
+
+    return im
+
+
+
+def draw_random_line_aa(im, red, green, blue):
+
+    r0 = np.random.randint(0, high=224)
+    c0 = np.random.randint(0, high=224)
+
+    r1 = np.random.randint(0, high=224)
+    c1 = np.random.randint(0, high=224)
+
+    rr, cc, val = line_aa(r0, c0, r1, c1)
+
+    im[0, rr,cc] = val * red
+    im[1, rr, cc] = val * green
+    im[2, rr, cc] = val * blue
+
+    return im
+
+def draw_random_color_line(im, red, green, blue):
+
+    r0 = np.random.randint(0, high=224)
+    c0 = np.random.randint(0, high=224)
+
+    r1 = np.random.randint(0, high=224)
+    c1 = np.random.randint(0, high=224)
+
+    rr, cc = line(r0, c0, r1, c1)
+
+    im[0, rr, cc] = red
+    im[1, rr, cc] = green
+    im[2, rr, cc] = blue
+
+    return im
 
 def red_line_with_blue_distractors(filts, num_distractors = 10):
     """Routine for creating input and target images containing a straight red oriented line and with
@@ -40,6 +87,98 @@ def red_line_with_blue_distractors(filts, num_distractors = 10):
             Note that the angle at each point is np.arctan2(y,x)"""
     raise NotImplementedError("")
 
+
+def draw_bezier_curve_line(im, red, green, blue):
+
+    r0 = np.random.randint(0, high=224)
+    c0 = np.random.randint(0, high=224)
+
+    r1 = np.random.randint(0, high=224)
+    c1 = np.random.randint(0, high=224)
+
+    r2 = np.random.randint(0, high=224)
+    c2 = np.random.randint(0, high=224)
+
+    weight = np.random.randint(0, 11)
+
+    rr, cc = bezier_curve(r0, c0, r1, c1, r2, c2, weight, (224, 224))
+
+    im[0, rr, cc] = red # im[0][rr,cc]?
+    im[1, rr, cc] = green
+    im[2, rr, cc] = blue
+
+    return im
+
+def draw_random_polygon_solid(im, red, green, blue, n_sides):
+
+    x_array = []
+    y_array = []
+
+    for i in range(n_sides):
+        x = np.random.randint(0, high=224)
+        y = np.random.randint(0, high=224)
+
+        x_array.append(x)
+        y_array.append(y)
+
+
+
+    rr, cc = polygon(x_array, y_array)
+    im[0, rr, cc] = red
+    im[1, rr, cc] = green
+    im[2, rr, cc] = blue
+
+    return im
+
+
+def draw_random_polygon_perimeter(im, red, green, blue, n_sides):
+    x_array = []
+    y_array = []
+
+    for i in range(n_sides):
+        x = np.random.randint(0, high=224)
+        y = np.random.randint(0, high=224)
+
+        x_array.append(x)
+        y_array.append(y)
+
+
+    rr, cc = polygon_perimeter(x_array, y_array, shape=im[0].shape, clip=True)
+    im[0, rr, cc] = red
+    im[1, rr, cc] = green
+    im[2, rr, cc] = blue
+
+    return im
+
+
+def draw_random_ellipse_solid(im, red, green, blue):
+        r = np.random.randint(0, high=224)
+        c = np.random.randint(0, high=224)
+
+        r_radius = np.random.uniform(0, 112)
+        c_radius = np.random.uniform(0, 112)
+
+        rotation = np.random.uniform(-np.pi, np.pi)
+
+        rr, cc = ellipse(r,c,r_radius, c_radius, shape=im[0].shape, rotation=rotation)
+        im[0, rr, cc] = red
+        im[1, rr, cc] = green
+        im[2, rr, cc] = blue
+
+
+def draw_random_ellipse_perimeter(im, red, green, blue):
+    r = np.random.randint(0, high=224)
+    c = np.random.randint(0, high=224)
+
+    r_radius = np.random.randint(0, high=112)
+    c_radius = np.random.randint(0, high=112)
+
+    orientation = np.random.uniform(-np.pi, np.pi)
+
+    rr, cc = ellipse_perimeter(r, c, r_radius, c_radius, orientation = orientation, shape = im[0].shape)
+    im[0, rr, cc] = red
+    im[1, rr, cc] = green
+    im[2, rr, cc] = blue
 
 
 def curved_black_line(filts):
@@ -146,3 +285,67 @@ def get_quadratures(kernel_size):
              for angle in np.arange(0, np.pi, np.pi / 4)]
 
     return filts
+
+
+def add_random_line_color_n(im, red, green, blue, n):
+    for x in range(n):
+        draw_random_color_line(im,red, green, blue)
+
+    return im
+
+def add_random_line_aa_color_n(im, red, green, blue, n):
+    for x in range(n):
+        draw_random_line_aa(im, red, green, blue)
+
+    return im
+
+def add_random_polygon_perimeter_n(im, red, green, blue, n):
+    for x in range(n):
+        draw_random_polygon_perimeter(im, red, green, blue)
+
+    return im
+
+def add_random_ellipse_perimeter(im, red, green, blue, n):
+    for x in range(n):
+        draw_random_ellipse_perimeter(im, red, green, blue)
+
+def main():
+    empty_img = np.zeros((3, 224, 224))
+
+    # print(empty_img)
+
+    # add_random_line(empty_img)
+
+    # bezier_curve_line(empty_img, 244, 244, 244)
+    # add_random_line_color_n(empty_img, 255, 255, 1, 100)
+
+    # add_test_line(empty_img)
+
+    print(empty_img.shape)
+    #
+    # add_random_line_aa(empty_img)
+    # random_polygon(empty_img, 200, 100, 55, 4)
+
+    # for row in range(244):
+    #     for col in range(244):
+    #         value = empty_img[0, row, col]
+    #         if (value != 0):
+    #             print (row, col)
+
+    draw_random_ellipse_perimeter(empty_img, 200, 100, 55)
+
+    KERNEL_SIZE = 15
+    filts = get_quadratures(KERNEL_SIZE)
+
+    empty_img = get_orientation_map(empty_img[0], filts)
+
+    plt.imshow(empty_img[0])
+    plt.show()
+
+    plt.imshow(empty_img[1])
+    plt.show()
+
+    plt.imshow(empty_img[2])
+    plt.show()
+
+main()

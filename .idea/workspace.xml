@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py" line="82" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/from_lines/data_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/data_generators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -61,8 +64,11 @@
           <file leaf-file-name="gen_and_save_lines.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="587">
-                  <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
+                <state relative-caret-position="-510">
+                  <caret line="21" column="53" lean-forward="true" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+                  <folding>
+                    <element signature="e#0#288#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -91,8 +97,8 @@
           <file leaf-file-name="data_generators.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="726">
-                  <caret line="345" column="14" lean-forward="true" selection-start-line="345" selection-start-column="14" selection-end-line="345" selection-end-column="14" />
+                <state relative-caret-position="4483">
+                  <caret line="311" column="27" selection-start-line="311" selection-start-column="5" selection-end-line="311" selection-end-column="27" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -143,8 +149,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/train_decoder.py" />
-        <option value="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" />
         <option value="$PROJECT_DIR$/from_lines/data_generators.py" />
+        <option value="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" />
       </list>
     </option>
   </component>
@@ -385,19 +391,22 @@
     <entry file="file://$PROJECT_DIR$/gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py">
+    <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
+        <state relative-caret-position="289">
+          <caret line="17" column="19" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
+    <entry file="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="345" column="14" lean-forward="true" selection-start-line="345" selection-start-column="14" selection-end-line="345" selection-end-column="14" />
+        <state relative-caret-position="-510">
+          <caret line="21" column="53" lean-forward="true" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#0#288#0" expanded="true" />
           </folding>
         </state>
       </provider>

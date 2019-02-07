@@ -309,6 +309,10 @@ def add_random_ellipse_perimeter(im, red, green, blue, n):
     for x in range(n):
         draw_random_ellipse_perimeter(im, red, green, blue)
 
+def add_random_curved_lines(im, red, green, blue, n):
+    for x in range(n):
+        draw_bezier_curve_line(im, red, green, blue)
+
 def main():
     empty_img = np.zeros((3, 224, 224))
 

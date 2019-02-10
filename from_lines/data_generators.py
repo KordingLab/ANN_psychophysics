@@ -385,6 +385,7 @@ def draw_random_ellipse_perimeter(im, red, green, blue):
     im[2, rr, cc] = blue
 
 
+
 def curved_black_line(filts):
     """Routine for creating input and target images containing a curved black line.
 

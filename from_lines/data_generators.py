@@ -4,7 +4,6 @@ from scipy.signal import convolve2d
 from scipy.ndimage import rotate
 from skimage.draw import (line_aa, line, bezier_curve,polygon_perimeter, polygon,
                           ellipse, ellipse_perimeter)
-import matplotlib.pyplot as plt
 import math
 
 
@@ -537,16 +536,16 @@ def add_random_curved_lines(im, red, green, blue, n):
 
 
 
+#
+# def main():
+    # empty_img = np.zeros((3, 224, 224))
+    # draw_color_line_width(empty_img, 100, 212, 10, 25)
+    #
+    # plt.imshow(empty_img[0])
+    # plt.show()
+    # 
+    # plt.imshow(empty_img[1])
+    # plt.show()
 
-def main():
-    empty_img = np.zeros((3, 224, 224))
-    draw_color_line_width(empty_img, 100, 212, 10, 25)
 
-    plt.imshow(empty_img[0])
-    plt.show()
-
-    plt.imshow(empty_img[1])
-    plt.show()
-
-
-main()
+# main()

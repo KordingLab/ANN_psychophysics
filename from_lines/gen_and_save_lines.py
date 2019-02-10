@@ -116,10 +116,10 @@ def main():
     all_inputs, all_targets = gen_batch_thin_lines_aa(255, 255, 255, 5)
 
     all_inputs = pd.DataFrame(np.stack(all_inputs))
-    all_inputs.to_hdf('data/geometric_arrays/five_thin_lines_input.h5', key="l", mode='w')
+    all_inputs.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/five_thin_lines_input.h5', key="l", mode='w')
 
     all_targets = pd.DataFrame(np.stack(all_targets))
-    all_targets.to_hdf('data/geometric_array/five_thin_lines_targets.h5', key="l", mode='w')
+    all_targets.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/five_thin_lines_targets.h5', key="l", mode='w')
 
     # #curved lines
     # all_inputs, all_targets = gen_batch_random_curved_lines(255, 255, 255, 10)

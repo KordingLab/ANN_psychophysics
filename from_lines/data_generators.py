@@ -543,7 +543,7 @@ def add_random_curved_lines(im, red, green, blue, n):
     #
     # plt.imshow(empty_img[0])
     # plt.show()
-    # 
+    #
     # plt.imshow(empty_img[1])
     # plt.show()
 

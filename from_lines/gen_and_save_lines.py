@@ -151,6 +151,8 @@ def main():
     all_targets = pd.DataFrame(np.stack(all_targets))
     all_targets.to_hdf('/home/rguan/DNN_illusions/data/features/straight_lines/ten_thick_ellipses_targets.h5', key="l", mode='w')
 
+main()
+
 
 
 

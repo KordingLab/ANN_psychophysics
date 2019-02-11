@@ -46,7 +46,7 @@ def gen_batch_thin_lines_aa(red, green, blue, num_lines_per_img):
 def gen_batch_lines_aa_width(red, green, blue, max_width, num_lines_per_img):
     all_inputs = list()
     all_targets = list()
-    n_samples = 10000
+    n_samples = 10
     for n in range(n_samples):
         image_array = np.zeros((3, 224, 224))
         input = add_random_line_aa_color_width_n(image_array, red, green, blue, max_width, num_lines_per_img)
@@ -131,25 +131,27 @@ def main():
     # all_targets.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/ten_thin_curved_lines_targets.h5', key="l", mode='w')
     #
     #
-    # #thick lines aa
-    #
-    # all_inputs, all_targets = gen_batch_lines_aa_width(255, 255, 255, 10, 5)
-    #
-    # all_inputs = pd.DataFrame(np.stack(all_inputs))
+    #thick lines aa
+
+    all_inputs, all_targets = gen_batch_lines_aa_width(255, 255, 255, 10, 5)
+
+    all_inputs = pd.DataFrame(np.stack(all_inputs))
     # all_inputs.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/five_thick_lines_input.h5', key="l", mode='w')
-    #
-    # all_targets = pd.DataFrame(np.stack(all_targets))
+    all_inputs.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/test.h5', key="l", mode='w')
+
+    all_targets = pd.DataFrame(np.stack(all_targets))
     # all_targets.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/five_thick_lines_targets.h5', key="l", mode='w')
+    all_inputs.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/test1.h5', key="l", mode='w')
 
     #ellipses
 
-    all_inputs, all_targets = gen_batch_random_ellipse_perimeter(255, 255, 255, 15, 10)
-
-    all_inputs = pd.DataFrame(np.stack(all_inputs))
-    all_inputs.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/ten_thick_ellipses_input.h5', key="l", mode='w')
-
-    all_targets = pd.DataFrame(np.stack(all_targets))
-    all_targets.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/ten_thick_ellipses_targets.h5', key="l", mode='w')
+    # all_inputs, all_targets = gen_batch_random_ellipse_perimeter(255, 255, 255, 15, 10)
+    #
+    # all_inputs = pd.DataFrame(np.stack(all_inputs))
+    # all_inputs.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/ten_thick_ellipses_input.h5', key="l", mode='w')
+    #
+    # all_targets = pd.DataFrame(np.stack(all_targets))
+    # all_targets.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/ten_thick_ellipses_targets.h5', key="l", mode='w')
 
 main()
 

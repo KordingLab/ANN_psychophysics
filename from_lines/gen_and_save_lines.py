@@ -136,12 +136,12 @@ def main():
     all_inputs, all_targets = gen_batch_lines_aa_width(255, 255, 255, 10, 5)
 
     all_inputs = pd.DataFrame(np.stack(all_inputs))
-    # all_inputs.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/five_thick_lines_input.h5', key="l", mode='w')
-    all_inputs.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/test.h5', key="l", mode='w')
+    all_inputs.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/five_thick_lines_input.h5', key="l", mode='w')
+
 
     all_targets = pd.DataFrame(np.stack(all_targets))
-    # all_targets.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/five_thick_lines_targets.h5', key="l", mode='w')
-    all_inputs.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/test1.h5', key="l", mode='w')
+    all_targets.to_hdf('/home/rguan/DNN_illusions/data/geometric_array/five_thick_lines_targets.h5', key="l", mode='w')
+
 
     #ellipses
 

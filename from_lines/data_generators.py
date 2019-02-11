@@ -147,6 +147,8 @@ def draw_colored_line_perimeter(im, red, green, blue, width):
 
         m_slope = (r0 - r1) / (c0 - c1)
 
+        print("slope: ", m_slope)
+
         c0_prime = math.floor((c0 * m_slope ** 2 + c0 - math.sqrt((m_slope ** 4 + m_slope ** 2) * width ** 2)) /
                               (m_slope ** 2 + 1))
         c1_prime = math.floor((c1 * m_slope ** 2 + c1 - math.sqrt((m_slope ** 4 + m_slope ** 2) * width ** 2)) /

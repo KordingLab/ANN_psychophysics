@@ -47,6 +47,25 @@ def scale_array_by_width(img, width):
     return scaled_adjusted_image
 
 
+def many_white_lines(filts):
+    """Returns a *white* image with many *black* lines, some curved.
+
+    Also returns the orientation map.
+    """
+
+    how_many_of_each = np.random.randint(0, 5, size=(5,))
+
+    im = np.zeros((3, 224, 224))
+    im = add_random_ellipse_perimeter(im, 1., 1., 1., 1, how_many_of_each[0])
+    im = add_random_line_aa_color_n(im, 1., 1., 1., how_many_of_each[1])
+    im = add_random_curved_lines(im, 1., 1., 1., how_many_of_each[3])
+    im = add_random_line_aa_color_n(im, 1., 1., 1., how_many_of_each[4])
+
+    orients = get_orientation_map(im[0], filts)
+
+    im = 1. - im
+
+    return im, orients
 
 def draw_random_line_aa(im, red, green, blue):
 

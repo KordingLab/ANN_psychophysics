@@ -144,7 +144,8 @@ def draw_colored_line_perimeter(im, red, green, blue, width):
         r1_prime = r1 + width
 
     else:
-
+        print(r0-r1)
+        print(c0-c1)
         m_slope = (r0 - r1) / (c0 - c1)
 
         print("slope, c0, r0, c1, r1 : ", m_slope,  c0, r0, c1, r1)

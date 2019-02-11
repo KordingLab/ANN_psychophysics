@@ -155,13 +155,11 @@ def draw_colored_line_perimeter(im, red, green, blue, width):
         r0_prime = math.floor(((c0_prime - c0) / m_slope) + r0)
         r1_prime = math.floor(((c1_prime - c1) / m_slope) + r1)
 
-    c0_prime = check_outbounds(c0_prime)
-    c1_prime = check_outbounds(c1_prime)
+    c0_prime = int(check_outbounds(c0_prime))
+    c1_prime = int(check_outbounds(c1_prime))
 
-    r0_prime = check_outbounds(r0_prime)
-    r1_prime = check_outbounds(r1_prime)
-
-    print("r1_prime, c1_prime: ", r1_prime, c1_prime)
+    r0_prime = int(check_outbounds(r0_prime))
+    r1_prime = int(check_outbounds(r1_prime))
 
 
     rr11, cc11, val11 = line_aa(r0, c0, r1, c1)

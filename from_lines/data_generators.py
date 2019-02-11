@@ -161,6 +161,8 @@ def draw_colored_line_perimeter(im, red, green, blue, width):
     r0_prime = check_outbounds(r0_prime)
     r1_prime = check_outbounds(r1_prime)
 
+    print("r1_prime, c1_prime: ", r1_prime, c1_prime)
+
 
     rr11, cc11, val11 = line_aa(r0, c0, r1, c1)
     rr22, cc22, val22 = line_aa(r1, c1, r1_prime, c1_prime)

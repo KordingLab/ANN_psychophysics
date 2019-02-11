@@ -4,10 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py" line="99" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/from_lines/data_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/data_generators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" afterDir="false" />
-    </list>
+    <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,8 +77,8 @@
       <file leaf-file-name="data_generators.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="242" column="43" selection-start-line="242" selection-start-column="43" selection-end-line="242" selection-end-column="43" />
+            <state relative-caret-position="1508">
+              <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -109,6 +106,7 @@
       <find>add</find>
       <find>gen</find>
       <find>input</find>
+      <find>draw_color_line</find>
     </findStrings>
     <replaceStrings>
       <replace>randint</replace>
@@ -383,8 +381,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="242" column="43" selection-start-line="242" selection-start-column="43" selection-end-line="242" selection-end-column="43" />
+        <state relative-caret-position="1508">
+          <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>

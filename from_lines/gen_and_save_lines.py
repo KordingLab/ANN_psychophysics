@@ -46,7 +46,7 @@ def gen_batch_thin_lines_aa(red, green, blue, num_lines_per_img):
 def gen_batch_lines_aa_width(red, green, blue, max_width, num_lines_per_img):
     all_inputs = list()
     all_targets = list()
-    n_samples = 10
+    n_samples = 10000
     for n in range(n_samples):
         image_array = np.zeros((3, 224, 224))
         input = add_random_line_aa_color_width_n(image_array, red, green, blue, max_width, num_lines_per_img)

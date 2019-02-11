@@ -243,10 +243,6 @@ def draw_color_line_width(im, red, green, blue, width):
             im[2][index][start:stop] = blue
 
 
-
-
-
-
 def red_line_with_blue_distractors(filts, num_distractors = 10):
     """Routine for creating input and target images containing a straight red oriented line and with
     blue thin distracting lines the background. The `orientation image` target contains the orientation

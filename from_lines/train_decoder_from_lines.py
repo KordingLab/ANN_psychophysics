@@ -26,10 +26,10 @@ if __name__ == '__main__':
                              If lines_targets.h5 does not exist, we just plot the input and model output.""")
     parser.add_argument('--no-cuda', action='store_true',
                     help='Disable CUDA')
-    parser.add_argument('--nonlinear', action='store_true',
-                        help='Use the decoder with nonlinear 2 layer network')
-    parser.add_argument('--upsample', action='store_true',
-                    help='Use the decoder in decoder_upsample')
+    parser.add_argument('--nonlinear', action='store_false',
+                        help='Dont se the decoder with nonlinear 2 layer network')
+    parser.add_argument('--upsample', action='store_false',
+                    help='dont use the decoder in decoder_upsample')
     parser.add_argument("--card", help="which card to use",
                         type=int, default =0 )
     args = parser.parse_args()
@@ -62,7 +62,7 @@ if __name__ == '__main__':
             params_to_update.append(param)
 
     optimizer = torch.optim.Adam(params_to_update, 1e-4,
-                                 weight_decay=1e-4)
+                                 weight_decay=1e-5)
 
     criterion = torch.nn.MSELoss()
 

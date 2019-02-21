@@ -18,7 +18,7 @@ def batch_folder_images(folder_path):
         if filename.endswith(".png"):
             image_path_string = os.path.join(directory, file)
             print(image_path_string)
-            array_img = png_to_array(filename)
+            array_img = png_to_array(image_path_string)
             all_illusions.append(array_img.reshape(-1))
             continue
         else:

@@ -32,7 +32,7 @@ def save_h5(array):
 
 def main():
     print("starting")
-    batch_array = batch_folder_images('/home/rguan/data/illusions_png')
+    batch_array = batch_folder_images('/home/rguan/data/illusions_png/')
     save_h5(batch_array)
 
 main()

@@ -7,7 +7,12 @@ def png_to_array(image_path):
     string_path = image_path.decode('ascii')
     print("IMAGE PATH: ", string_path)
     image = cv2.imread(string_path, 0) #0 second argument means read as grayscale . . 1 = read as color, -1= read unchanged
+    three_channel_image = np.zeros((3, 224, 224))
     print("shape: ", image.shape)
+    three_channel_image[0] = image[:][:]
+    three_channel_image[1] = image[:][:]
+    three_channel_image[2] = image[:][:]
+
     return image
 
 def batch_folder_images(folder_path):

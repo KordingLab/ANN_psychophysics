@@ -7,7 +7,7 @@ def png_to_array(image_path):
     string_path = image_path.decode('ascii')
     print("IMAGE PATH: ", string_path)
     image = cv2.imread(string_path, 0) #0 second argument means read as grayscale . . 1 = read as color, -1= read unchanged
-    print("IMage", image)
+    print("shape: ", image.shape)
     return image
 
 def batch_folder_images(folder_path):
@@ -31,7 +31,7 @@ def batch_folder_images(folder_path):
 def save_h5(array):
     all_inputs = pd.DataFrame(np.stack(array))
     all_inputs.to_hdf('/home/rguan/DNN_illusions/data/illusions_h5/test1.h5', key="l", mode='w')
-    
+
 
 def main():
     print("starting")

@@ -55,7 +55,11 @@
       </file>
       <file leaf-file-name="test_decoder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="171" column="14" selection-start-line="171" selection-start-column="4" selection-end-line="171" selection-end-column="14" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="gen_and_save_lines.py" pinned="false" current-in-tab="false">
@@ -73,8 +77,8 @@
       <file leaf-file-name="batch_png_to_h5.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/from_lines/batch_png_to_h5.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="153">
+              <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -131,6 +135,11 @@
       <find>gen</find>
       <find>input</find>
       <find>draw_color_line</find>
+      <find>save</find>
+      <find>vg</find>
+      <find>vgg</find>
+      <find>model</find>
+      <find>load_models(args)</find>
     </findStrings>
     <replaceStrings>
       <replace>randint</replace>
@@ -361,9 +370,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/from_lines/decoder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -410,10 +416,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="171" column="14" selection-start-line="171" selection-start-column="4" selection-end-line="171" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/from_lines/batch_png_to_h5.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        <state relative-caret-position="153">
+          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

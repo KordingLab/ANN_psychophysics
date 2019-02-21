@@ -4,6 +4,7 @@ import os
 import pandas as pd
 
 def png_to_array(image_path):
+    print("IMAGE PATH: ", image_path)
     image = cv2.imread(image_path, 0) #0 second argument means read as grayscale . . 1 = read as color, -1= read unchanged
     print("IMage", image)
     return image

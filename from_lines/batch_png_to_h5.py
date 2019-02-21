@@ -4,8 +4,9 @@ import os
 import pandas as pd
 
 def png_to_array(image_path):
-    print("IMAGE PATH: ", image_path)
-    image = cv2.imread(image_path, 0) #0 second argument means read as grayscale . . 1 = read as color, -1= read unchanged
+    string_path = image_path.decode('ascii')
+    print("IMAGE PATH: ", string_path)
+    image = cv2.imread(string_path, 0) #0 second argument means read as grayscale . . 1 = read as color, -1= read unchanged
     print("IMage", image)
     return image
 
@@ -17,8 +18,7 @@ def batch_folder_images(folder_path):
         filename = os.fsdecode(file)
         if filename.endswith(".png"):
             image_path_string = os.path.join(directory, file)
-            string_path = folder_path + file
-            print(image_path_string, string_path)
+            print(image_path_string)
             array_img = png_to_array(image_path_string)
             all_illusions.append(array_img.reshape(-1))
             continue

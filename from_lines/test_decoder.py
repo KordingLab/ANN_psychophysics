@@ -71,7 +71,7 @@ def save_and_visualize(images):
 
         plt.figure(figsize=(15, 5))
         plt.subplot(131)
-        plt.imshow(np.moveaxis(im,0,2))
+        plt.imshow(np.moveaxis(input,0,2))
         ax = plt.gca()
         ax.set_axis_off()
         ax.set_title("Input")

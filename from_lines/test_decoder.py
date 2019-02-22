@@ -25,7 +25,7 @@ def pass_test_images(model, image_path, args):
                         target_orientation_image (2x224x224))
     """
 
-    BATCH_SIZE = 4
+    BATCH_SIZE = 19
 
     samples = data_iterator(image_path+'lines.h5', BATCH_SIZE)
     try:

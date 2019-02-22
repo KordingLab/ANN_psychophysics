@@ -5,6 +5,7 @@ import argparse
 import os
 from decoder import OrientationDecoder
 from data_loader_utils import data_iterator
+from data_generators import get_quadratures, get_orientation_map
 from decoder_nonlinear import OrientationDecoder as OrientationDecoderNonlinear
 from decoder_upsample import OrientationDecoder as OrientationDecoderUpsample
 from decoder_upsample_nonlinear import OrientationDecoder as OrientationDecoderUpsampleNonlinear
@@ -56,7 +57,7 @@ def pass_test_images(model, image_path, args):
 
 
 
-def save_and_visualize(images):
+def save_and_visualize(images, kernel_size=15):
     """Iterates through images and saves and prints both the original images, output orientation images,
     and target orientation images, in that order.
 
@@ -85,7 +86,14 @@ def save_and_visualize(images):
             ax3 = show_orientation_image(target)
             ax3.set_title("Target orientation")
         except:
-            print("Error in plotting target")
+            print("Recomputing orientation image with kernel size {}".format(kernel_size))
+            filts = get_quadratures(kernel_size)
+            target = get_orientation_map(np.mean(input,axis=0), filts)
+            plt.subplot(133)
+            ax3 = show_orientation_image(target)
+            ax3.set_title("Target orientation")
+
+
         plt.tight_layout()
         plt.savefig("Decoded_test_image_{}.png".format(i))
         plt.show()

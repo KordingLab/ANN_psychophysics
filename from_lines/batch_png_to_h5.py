@@ -9,9 +9,9 @@ def png_to_array(image_path):
     image = cv2.imread(string_path, 0) #0 second argument means read as grayscale . . 1 = read as color, -1= read unchanged
     three_channel_image = np.zeros((3, 224, 224))
 
-    three_channel_image[0] = image[:][:] #lazy and perhaps inefficient way of copying arrays. . . Might change later
-    three_channel_image[1] = image[:][:]
-    three_channel_image[2] = image[:][:]
+    three_channel_image[0] = image[:,:] * (1.0/255) #lazy and perhaps inefficient way of copying arrays. . . Might change later
+    three_channel_image[1] = image[:,:]  * (1.0/255)
+    three_channel_image[2] = image[:,:] * (1.0/255)
     print("3 channel shape: ", three_channel_image.shape)
     return three_channel_image
 

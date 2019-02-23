@@ -88,7 +88,9 @@ def save_and_visualize(images, kernel_size=15):
         except:
             print("Recomputing orientation image with kernel size {}".format(kernel_size))
             filts = get_quadratures(kernel_size)
-            target = get_orientation_map(np.mean(input,axis=0), filts)
+
+
+            target = get_orientation_map(np.mean(check_on_float_scale(input),axis=0), filts)
             plt.subplot(133)
             ax3 = show_orientation_image(target)
             ax3.set_title("Target orientation")
@@ -98,7 +100,10 @@ def save_and_visualize(images, kernel_size=15):
         plt.savefig("Decoded_test_image_{}.png".format(i))
         plt.show()
 
-
+def check_on_float_scale(image):
+    if np.any(image > 2.):
+        image = image/255.
+    return image
 
 def check_sizes(input,output):
     assert input.shape == (3,224,224)
@@ -113,25 +118,6 @@ def get_uniform_colormap():
     color_circle_rgb = cspace_convert(color_circle, "JCh", "sRGB1")
     cm = ListedColormap(color_circle_rgb)
     return cm
-
-
-def show_orientation_image_legacy(im):
-    """Takes a 2x224x224 image and plots the 224x224 image with orientations"""
-    assert im.shape == (2,224,224)
-    cm = get_uniform_colormap()
-
-    angle_image = np.arctan2(im[0], im[1], )
-    a = plt.imshow(angle_image,
-                   cmap=cm,
-                   vmin=-np.pi,
-                   vmax=np.pi)
-
-    ax = plt.gca()
-    ax.set_axis_off()
-    cbar = plt.colorbar(a, aspect=10, fraction=.07)
-    cbar.ax.set_ylabel('Phase [pi]')
-
-    return ax
 
 def show_orientation_image(orientation_image, equiluminant = False):
     """Takes a 2x224x224 image, with the two channels corresponding to x and y values,

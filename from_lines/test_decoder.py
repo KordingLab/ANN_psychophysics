@@ -89,8 +89,8 @@ def save_and_visualize(images, kernel_size=15):
             print("Recomputing orientation image with kernel size {}".format(kernel_size))
             filts = get_quadratures(kernel_size)
 
-
-            target = get_orientation_map(np.mean(check_on_float_scale(input),axis=0), filts)
+            # note that we invert to get the map
+            target = get_orientation_map(1-np.mean(check_on_float_scale(input),axis=0), filts)
             plt.subplot(133)
             ax3 = show_orientation_image(target)
             ax3.set_title("Target orientation")

@@ -18,7 +18,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-def pass_test_images(model, image_path, args):
+def pass_test_images(model, image_path, gpu = True):
     """This script loads a model, as specified by the path, tests some images, and displays the decoded images.
 
 
@@ -35,12 +35,12 @@ def pass_test_images(model, image_path, args):
         targets = [None] * BATCH_SIZE
 
     for batch_idx, feats in enumerate(samples):
-        if args.gpu:
+        if gpu:
             feats = feats.cuda()
         data = Variable(feats)
 
         output = model(data).detach()
-        if args.gpu:
+        if gpu:
             output = output.cpu()
             data = data.cpu()
         break
@@ -57,7 +57,7 @@ def pass_test_images(model, image_path, args):
 
 
 
-def save_and_visualize(images, kernel_size=15):
+def save_and_visualize(images, kernel_size=15, save = True):
     """Iterates through images and saves and prints both the original images, output orientation images,
     and target orientation images, in that order.
 
@@ -97,7 +97,8 @@ def save_and_visualize(images, kernel_size=15):
 
 
         plt.tight_layout()
-        plt.savefig("Decoded_test_image_{}.png".format(i))
+        if save:
+            plt.savefig("Decoded_test_image_{}.png".format(i))
         plt.show()
 
 def check_on_float_scale(image):
@@ -207,6 +208,6 @@ if __name__ == '__main__':
     model = load_model(args)
     if args.gpu:
         model = model.cuda()
-    images = pass_test_images(model, args.image_directory,args)
+    images = pass_test_images(model, args.image_directory,args.gpu)
 
     save_and_visualize(images)

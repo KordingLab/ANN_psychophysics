@@ -103,8 +103,10 @@ def save_and_visualize(images, kernel_size=15, save = True):
             plt.savefig("Decoded_test_image_{}.png".format(i))
             #save just decoded png
             print(type(output), output.shape)
-            matplotlib.image.imsave('only_decoded_img_{}.png'.format(i), ax2)
-            matplotlib.image.imsave('only_target_img_{}.png'.format(i), ax3)
+            output_img = convert_to_orientation_image(output)
+            target_img = convert_to_orientation_image(target)
+            matplotlib.image.imsave('only_decoded_img_{}.png'.format(i), output_img)
+            matplotlib.image.imsave('only_target_img_{}.png'.format(i), target_img)
         plt.show()
 
 def check_on_float_scale(image):
@@ -125,6 +127,27 @@ def get_uniform_colormap():
     color_circle_rgb = cspace_convert(color_circle, "JCh", "sRGB1")
     cm = ListedColormap(color_circle_rgb)
     return cm
+
+def convert_to_orientation_image(orientation_image, equiluminant = False):
+    cmap = get_uniform_colormap()
+
+    angle_image = np.arctan2(orientation_image[1], orientation_image[0], )/np.pi/2+0.5
+    rgba_image = cmap(angle_image)
+    #drop the alpha channel
+    rgb_image = rgba_image[:,:,:3]
+
+
+    #convert to hsl
+    hsv_image = mpl.colors.rgb_to_hsv(rgb_image)
+
+    # make v channel the magnitude
+    magnitudes = np.maximum(np.minimum(np.nan_to_num(np.sqrt(np.square(orientation_image[0])
+                                                                +np.square(orientation_image[1]) )),1),0)
+
+    hsv_image[:,:,2] = magnitudes
+    rgb_image = mpl.colors.hsv_to_rgb(hsv_image)
+
+    return rgb_image
 
 def show_orientation_image(orientation_image, equiluminant = False):
     """Takes a 2x224x224 image, with the two channels corresponding to x and y values,

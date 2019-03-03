@@ -16,7 +16,6 @@ import matplotlib as mpl
 from colorspacious import cspace_convert
 import numpy as np
 from matplotlib import pyplot as plt
-from PIL import Image
 
 
 
@@ -102,8 +101,8 @@ def save_and_visualize(images, kernel_size=15, save = True):
         if save:
             plt.savefig("Decoded_test_image_{}.png".format(i))
             #save just decoded png
-            decoded_im = Image.fromarray(output)
-            decoded_im.save("decoded_image_{}.png")
+            plt.imshow(output)
+            plt.savefig("Only_decoded_output_{}.png".format(i))
         plt.show()
 
 def check_on_float_scale(image):

@@ -35,7 +35,7 @@ def batch_folder_images(folder_path):
 
 def save_h5(array):
     all_inputs = pd.DataFrame(np.stack(array))
-    all_inputs.to_hdf('/home/rguan/DNN_illusions/data/illusions_h5/test1.h5', key="l", mode='w')
+    all_inputs.to_hdf('/home/rguan/DNN_illusions/data/illusions_h5/lines.h5', key="l", mode='w')
 
 
 def main():

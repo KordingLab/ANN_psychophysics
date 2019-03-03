@@ -13,6 +13,7 @@ from decoder_upsample_nonlinear import OrientationDecoder as OrientationDecoderU
 #visualize
 from matplotlib.colors import ListedColormap
 import matplotlib as mpl
+import matplotlib
 from colorspacious import cspace_convert
 import numpy as np
 from matplotlib import pyplot as plt
@@ -102,8 +103,7 @@ def save_and_visualize(images, kernel_size=15, save = True):
             plt.savefig("Decoded_test_image_{}.png".format(i))
             #save just decoded png
             print(type(output))
-            plt.imshow(output)
-            plt.savefig("Only_decoded_output_{}.png".format(i))
+            matplotlib.image.imsave('only_decoded_img_{}.png'.format(i), output)
         plt.show()
 
 def check_on_float_scale(image):

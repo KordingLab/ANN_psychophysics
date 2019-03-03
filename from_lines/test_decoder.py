@@ -102,7 +102,7 @@ def save_and_visualize(images, kernel_size=15, save = True):
         if save:
             plt.savefig("Decoded_test_image_{}.png".format(i))
             #save just decoded png
-            print(type(output))
+            print(type(output), output.shape)
             matplotlib.image.imsave('only_decoded_img_{}.png'.format(i), output)
         plt.show()
 

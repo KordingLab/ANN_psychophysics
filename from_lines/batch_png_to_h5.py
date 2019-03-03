@@ -21,7 +21,7 @@ def batch_folder_images(folder_path):
 
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
-        if filename.endswith(".png"):
+        if filename.endswith(".PNG"):
             image_path_string = os.path.join(directory, file)
             print(image_path_string)
             array_img = png_to_array(image_path_string)

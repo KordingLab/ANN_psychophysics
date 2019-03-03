@@ -4,10 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py" line="99" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_lines/batch_png_to_h5.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/batch_png_to_h5.py" afterDir="false" />
-    </list>
+    <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -4,9 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py" line="99" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/from_lines/test_decoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/test_decoder.py" afterDir="false" />
-    </list>
+    <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +51,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_decoder.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_decoder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="293">
@@ -77,10 +75,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="batch_png_to_h5.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="batch_png_to_h5.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/from_lines/batch_png_to_h5.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="391">
               <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -417,16 +415,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/from_lines/batch_png_to_h5.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/from_lines/train_decoder_from_lines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -440,6 +428,16 @@
           <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/batch_png_to_h5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>

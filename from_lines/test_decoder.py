@@ -105,7 +105,7 @@ def save_and_visualize(images, kernel_size=15, save = True):
             print(type(output), output.shape)
             output_img = convert_to_orientation_image(output)
             target_img = convert_to_orientation_image(target)
-            matplotlib.image.imsave('only_original_img_{}'.format(i), input)
+            # matplotlib.image.imsave('only_original_img_{}'.format(i), input)
             matplotlib.image.imsave('only_decoded_img_{}.png'.format(i), output_img)
             matplotlib.image.imsave('only_target_img_{}.png'.format(i), target_img)
         plt.show()

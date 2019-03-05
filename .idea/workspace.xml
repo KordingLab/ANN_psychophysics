@@ -4,7 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py" line="99" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="" />
+    <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/from_lines/find_and_visualize_slices.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/from_lines/plot_decoded_orientations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/plot_decoded_orientations.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/from_lines/test_decoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/test_decoder.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,6 +19,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/DNN_illusions$data_generators.coverage" NAME="data_generators Coverage Results" MODIFIED="1548951287362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/from_lines" />
+    <SUITE FILE_PATH="coverage/DNN_illusions$find_and_visualize_slices.coverage" NAME="find_and_visualize_slices Coverage Results" MODIFIED="1551731778583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/from_lines" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -51,13 +57,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_decoder.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test_decoder.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+            <state relative-caret-position="714">
+              <caret line="107" column="76" lean-forward="true" selection-start-line="107" selection-start-column="76" selection-end-line="107" selection-end-column="76" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plot_decoded_orientations.ipynb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/from_lines/plot_decoded_orientations.ipynb">
+          <provider selected="true" editor-type-id="ipnb-editor">
+            <state>
+              <selected id="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="find_and_visualize_slices.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/from_lines/find_and_visualize_slices.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="643">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,7 +93,7 @@
       <file leaf-file-name="gen_and_save_lines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1836">
+            <state relative-caret-position="116">
               <caret line="114" column="8" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="45" />
               <folding>
                 <element signature="e#0#394#0" expanded="true" />
@@ -75,10 +102,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="batch_png_to_h5.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="batch_png_to_h5.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/from_lines/batch_png_to_h5.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state relative-caret-position="340">
               <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -145,6 +172,7 @@
       <find>decoded</find>
       <find>save_and_visualize</find>
       <find>show</find>
+      <find>input_</find>
     </findStrings>
     <replaceStrings>
       <replace>randint</replace>
@@ -167,6 +195,7 @@
         <option value="$PROJECT_DIR$/from_lines/data_generators.py" />
         <option value="$PROJECT_DIR$/from_lines/gen_and_save_lines.py" />
         <option value="$PROJECT_DIR$/from_lines/batch_png_to_h5.py" />
+        <option value="$PROJECT_DIR$/from_lines/find_and_visualize_slices.py" />
         <option value="$PROJECT_DIR$/from_lines/test_decoder.py" />
       </list>
     </option>
@@ -215,6 +244,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\guanr\DNN_illusions\from_lines" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -227,7 +261,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.find_and_visualize_slices">
     <configuration name="data_generators" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Illusions" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -247,8 +281,32 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="find_and_visualize_slices" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Illusions" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/from_lines" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/from_lines/find_and_visualize_slices.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.data_generators" />
+      <item itemvalue="Python.find_and_visualize_slices" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.find_and_visualize_slices" />
         <item itemvalue="Python.data_generators" />
         <item itemvalue="Python.data_generators" />
       </list>
@@ -306,16 +364,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/from_lines/train_decoder_from_lines.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/from_lines/data_generators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="77" column="21" lean-forward="true" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/train_decoder.py" />
     <entry file="file://$PROJECT_DIR$/train_utils/train.py" />
     <entry file="file://$PROJECT_DIR$/model/Decoder.py" />
@@ -405,16 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="114" column="8" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#394#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/from_lines/train_decoder_from_lines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -422,22 +460,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
+    <entry file="file://$PROJECT_DIR$/from_lines/batch_png_to_h5.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+        <state relative-caret-position="340">
+          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/from_lines/batch_png_to_h5.py">
+    <entry file="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+        <state relative-caret-position="116">
+          <caret line="114" column="8" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="45" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#394#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/plot_decoded_orientations.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/find_and_visualize_slices.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="643">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="107" column="76" lean-forward="true" selection-start-line="107" selection-start-column="76" selection-end-line="107" selection-end-column="76" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>

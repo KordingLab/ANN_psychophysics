@@ -20,7 +20,7 @@ from matplotlib import pyplot as plt
 
 
 
-def pass_test_images(model, image_path, gpu = True):
+def pass_test_images(model, image_path, gpu = True, batch_size = 10):
     """This script loads a model, as specified by the path, tests some images, and displays the decoded images.
 
 
@@ -28,13 +28,12 @@ def pass_test_images(model, image_path, gpu = True):
                         target_orientation_image (2x224x224))
     """
 
-    BATCH_SIZE = 65
 
-    samples = data_iterator(image_path+'lines.h5', BATCH_SIZE)
+    samples = data_iterator(image_path+'lines.h5', batch_size)
     try:
-        targets = next(data_iterator(image_path+'lines_targets.h5', BATCH_SIZE))
+        targets = next(data_iterator(image_path+'lines_targets.h5', batch_size))
     except:
-        targets = [None] * BATCH_SIZE
+        targets = [None] * batch_size
 
     for batch_idx, feats in enumerate(samples):
         if gpu:
@@ -49,7 +48,7 @@ def pass_test_images(model, image_path, gpu = True):
 
     # Right now we have three 4x_x224x224 tensors, and we want it in list of tuple form
     input_output_target = []
-    for i in range(BATCH_SIZE):
+    for i in range(batch_size):
         inp = data[i].numpy()
         out = output[i].numpy()
         tar = targets[i]

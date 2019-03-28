@@ -5,7 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/from_lines" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.7 (TorchTutorial)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.7 (DNN_illusions)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">

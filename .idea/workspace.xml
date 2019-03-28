@@ -4,13 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py" line="99" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Illusions.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Illusions.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_lines/plot_decoded_orientations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/plot_decoded_orientations.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_lines/test_decoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_lines/test_decoder.py" afterDir="false" />
-    </list>
+    <list default="true" id="89e0f4ac-2838-43cf-9873-977bb78551db" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,8 +56,8 @@
       <file leaf-file-name="test_decoder.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="61" column="42" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+            <state relative-caret-position="187">
+              <caret line="29" lean-forward="true" selection-end-line="242" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -83,7 +77,7 @@
       <file leaf-file-name="find_and_visualize_slices.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/from_lines/find_and_visualize_slices.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
+            <state relative-caret-position="17">
               <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -176,17 +170,20 @@
       <find>input_</find>
       <find>save_and_visualize</find>
       <find>cuda</find>
+      <find>batch</find>
+      <find>batch_size</find>
     </findStrings>
     <replaceStrings>
       <replace>randint</replace>
       <replace>draw_random_line</replace>
+      <replace>batch_size</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="fixing_weird_head" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
@@ -359,9 +356,9 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32965517" />
       <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4275862" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.4275862" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28450522" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28450522" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -459,32 +456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/from_lines/decoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/from_lines/plot_decoded_orientations.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/from_lines/find_and_visualize_slices.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/from_lines/gen_and_save_lines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1836">
@@ -522,10 +493,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/plot_decoded_orientations.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/find_and_visualize_slices.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/from_lines/decoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/from_lines/test_decoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="61" column="42" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+        <state relative-caret-position="187">
+          <caret line="29" lean-forward="true" selection-end-line="242" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>

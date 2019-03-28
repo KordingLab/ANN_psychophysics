@@ -20,7 +20,11 @@ from matplotlib import pyplot as plt
 
 
 
+<<<<<<< HEAD
 def pass_test_images(model, image_path, gpu = True, batch_size = 10):
+=======
+def pass_test_images(model, image_path, gpu = True):
+>>>>>>> c3dd9656697f3ed5d6b2be192aa290345bd67a42
     """This script loads a model, as specified by the path, tests some images, and displays the decoded images.
 
 
@@ -28,8 +32,13 @@ def pass_test_images(model, image_path, gpu = True, batch_size = 10):
                         target_orientation_image (2x224x224))
     """
 
-
+<<<<<<< HEAD
     samples = data_iterator(image_path+'lines.h5', batch_size)
+=======
+    BATCH_SIZE = 65
+
+    samples = data_iterator(image_path+'lines.h5', BATCH_SIZE)
+>>>>>>> c3dd9656697f3ed5d6b2be192aa290345bd67a42
     try:
         targets = next(data_iterator(image_path+'lines_targets.h5', batch_size))
     except:
@@ -105,8 +114,13 @@ def save_and_visualize(images, kernel_size=15, save = True):
             output_img = convert_to_orientation_image(output)
             target_img = convert_to_orientation_image(target)
             # matplotlib.image.imsave('only_original_img_{}'.format(i), input)
+<<<<<<< HEAD
+#             matplotlib.image.imsave('only_decoded_img_{}.png'.format(i), output_img)
+#             matplotlib.image.imsave('only_target_img_{}.png'.format(i), target_img)
+=======
             matplotlib.image.imsave('only_decoded_img_{}.png'.format(i), output_img)
             matplotlib.image.imsave('only_target_img_{}.png'.format(i), target_img)
+>>>>>>> c3dd9656697f3ed5d6b2be192aa290345bd67a42
         plt.show()
 
 def check_on_float_scale(image):

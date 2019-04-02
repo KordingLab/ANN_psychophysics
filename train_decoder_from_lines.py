@@ -3,8 +3,6 @@ import torch
 from torch.autograd import Variable
 from data_loader_utils import data_iterator
 from decoder_upsample import OrientationDecoder as OrientationDecoderUpsample
-from decoder import OrientationDecoder
-from decoder_nonlinear import OrientationDecoder as OrientationDecoderNonlinear
 from decoder_upsample_nonlinear import OrientationDecoder as OrientationDecoderUpsampleNonlinear
 
 import pickle
@@ -45,16 +43,11 @@ if __name__ == '__main__':
 
 
     ### define the network: pull from a conv2d layer of the pretrained vgg network and train on top of that
-    if args.upsample:
-        if args.nonlinear:
-            vgg_and_decoder = OrientationDecoderUpsampleNonlinear(args.layer).cuda()
-        else:
-            vgg_and_decoder  = OrientationDecoderUpsample(args.layer).cuda()
+    if args.nonlinear:
+        vgg_and_decoder = OrientationDecoderUpsampleNonlinear(args.layer).cuda()
     else:
-        if args.nonlinear:
-            vgg_and_decoder = OrientationDecoderNonlinear(args.layer).cuda()
-        else:
-            vgg_and_decoder = OrientationDecoder(args.layer).cuda()
+        vgg_and_decoder  = OrientationDecoderUpsample(args.layer).cuda()
+
 
     params_to_update = []
     for name,param in vgg_and_decoder.named_parameters():

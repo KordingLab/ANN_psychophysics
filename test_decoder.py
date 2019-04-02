@@ -3,10 +3,8 @@ from torch.autograd import Variable
 
 import argparse
 import os
-from decoder import OrientationDecoder
 from data_loader_utils import data_iterator
 from data_generators import get_quadratures, get_orientation_map
-from decoder_nonlinear import OrientationDecoder as OrientationDecoderNonlinear
 from decoder_upsample import OrientationDecoder as OrientationDecoderUpsample
 from decoder_upsample_nonlinear import OrientationDecoder as OrientationDecoderUpsampleNonlinear
 
@@ -195,16 +193,11 @@ def show_orientation_image(orientation_image, equiluminant = False):
 
 def load_model(args):
     """Loads the VGG+decoder network trained and saved at path."""
-    if args.upsample:
-        if args.nonlinear:
-            model = OrientationDecoderUpsampleNonlinear(args.layer)
-        else:
-            model = OrientationDecoderUpsample(args.layer)
+    if args.nonlinear:
+        model = OrientationDecoderUpsampleNonlinear(args.layer)
     else:
-        if args.nonlinear:
-            model = OrientationDecoderNonlinear(args.layer)
-        else:
-            model = OrientationDecoder(args.layer)
+        model = OrientationDecoderUpsample(args.layer)
+
     model.load_state_dict(torch.load(args.model_path))
     model.eval()
     return model
@@ -224,8 +217,6 @@ if __name__ == '__main__':
                     help='Disable CUDA')
     parser.add_argument("--card", help="which card to use",
                         type=int, default =0 )
-    parser.add_argument('--upsample', action='store_true',
-                                help='Use the decoder with upsampling')
     parser.add_argument('--nonlinear', action='store_true',
                         help='Use the decoder with nonlinear 2 layer network')
     args = parser.parse_args()

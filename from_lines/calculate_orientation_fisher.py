@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 import torch
 import torch.nn as nn
-from torchvision import models
+from torchvision import models, transforms
 
 import argparse
 import pickle
@@ -26,12 +26,13 @@ Uses a finite-difference method:
 '''
 
 
-def generate_intersecting_rgb(centerloc, angle, relative_angle, linewidth = 1):
+def generate_intersecting_rgb(centerloc, angle, relative_angle, negative_mask, linewidth = 1):
     """
 
     :param centerloc: The location of the intersection, in pixels (0,224)
     :param angle: The angle of the midpoint of the intersection
     :param relative_angle: The angle between the two intersecting lines
+    :param negative_mask: A boolean array, (224,224), for which True values are brought to white
     :param linewidth: How wide the lines are
     :return: An RGB numpy array of shape (224,224,3) corresponding to the image
     """
@@ -60,6 +61,10 @@ def generate_intersecting_rgb(centerloc, angle, relative_angle, linewidth = 1):
     # combine. Note by taking the average the lines are overlaid with .50 alpha.
     im = (im + im2) / 2
 
+    #white out the image outside of the unit circle
+    im[negative_mask] = 1.
+
+
     return im
 
 
@@ -77,7 +82,7 @@ def numpy_to_torch(rgb_image):
     tens = torch.from_numpy(rgb_image[:,:,[2,1,0]])
     return tens.permute(2,0,1)
 
-def get_vgg_response(image, layer, network, centerloc, image_frac = .2):
+def get_vgg_response(image, network, centerloc, image_frac = .2):
     """
     Gets the response of the network of the VGG at a certain layer to a single image
     NOTE: we only return the activations corresponding to the center of the image.
@@ -94,6 +99,13 @@ def get_vgg_response(image, layer, network, centerloc, image_frac = .2):
     """
     torch_image = numpy_to_torch(image).float().cuda()
     # indexing by None adds a new axis in the beginning
+
+    #preprocess image
+    mean=torch.Tensor([[[0.485]], [[0.456]], [[0.406]]]).cuda()
+    std=torch.Tensor([[[0.229]], [[0.224]], [[0.225]]]).cuda()
+
+    torch_image = (torch_image - mean)/std
+
     out = network(torch_image[None])
 
     out = _crop_activations(out,centerloc,image_frac)
@@ -175,12 +187,18 @@ if __name__ == '__main__':
     parser.add_argument("--n-images",
                         help="How many images to use in the finite difference calculation",
                         type=int,
-                        default = 1000)
+                        default = 100)
+    parser.add_argument("--n-angles",
+                        help="How many 'main angles' to perform the final difference calculation upon",
+                        type=int,
+                        default=10)
     parser.add_argument("layer", help="which layer of VGG the model was trained to decode from",
                         type=int)
     parser.add_argument("--random-center",
                         help = "Randomly sampling the center point of the intersection",
                         action = 'store_true')
+    parser.add_argument("--verbose",
+                        action='store_true')
     parser.add_argument("--delta",
                         help = "Size, in radians, of the difference on either side of chosen distance",
                         type = float,
@@ -199,33 +217,49 @@ if __name__ == '__main__':
     #build network
     vgg_chopped = VGG_chopped(args.layer).cuda()
 
-    angles = np.linspace(-np.pi,np.pi,args.n_images)
-    fishers = []
-    for relative_angle in angles:
-        # decide on the intersecting location
-        centerloc = (112,112)
-        if args.random_center:
-            centerloc = np.random.randint(0, 224, 2)
+    # create negative mask. This is a circle centered in the middle of radius 100 pixels
+    unit_circle = np.zeros((224, 224)).astype(np.bool)
+    for i in range(224):
+        for j in range(224):
+            if (i - 112) ** 2 + (j - 112) ** 2 >= 100 ** 2:
+                unit_circle[i, j] = True
 
-        # randomly sample a main angle
-        main_angle = 2*np.pi*np.random.uniform()-np.pi
 
-        # get the image
-        plus_image = generate_intersecting_rgb(centerloc, main_angle, relative_angle+args.delta)
-        minus_image = generate_intersecting_rgb(centerloc, main_angle, relative_angle-args.delta)
 
-        # get the response
-        plus_resp = get_vgg_response(plus_image, args.layer, vgg_chopped, centerloc)
-        minus_resp = get_vgg_response(minus_image, args.layer ,vgg_chopped, centerloc)
+    angles = np.linspace(0,np.pi,args.n_images)
+    main_angles = np.linspace(0,np.pi,args.n_angles)
+    all_fishers = {}
+    for main_angle in main_angles:
+        if args.verbose:
+            print("On main angle {}".format(main_angle))
+        fishers = []
+        for relative_angle in angles:
+            # decide on the intersecting location
+            centerloc = (112,112)
+            if args.random_center:
+                centerloc = np.random.randint(0, 224, 2)
 
-        # get the Fisher. Now working in pytorch
-        df_dtheta = get_derivative(args.delta, plus_resp, minus_resp)
-        fishers.append(get_fisher(df_dtheta))
+            # randomly sample a main angle
+            # main_angle = 2*np.pi*np.random.uniform()-np.pi
+
+            # get the image
+            plus_image = generate_intersecting_rgb(centerloc, main_angle, relative_angle+args.delta, unit_circle)
+            minus_image = generate_intersecting_rgb(centerloc, main_angle, relative_angle-args.delta, unit_circle)
+
+            # get the response
+            plus_resp = get_vgg_response(plus_image, vgg_chopped, centerloc)
+            minus_resp = get_vgg_response(minus_image,vgg_chopped, centerloc)
+
+            # get the Fisher. Now working in pytorch
+            df_dtheta = get_derivative(args.delta, plus_resp, minus_resp)
+            fishers.append(get_fisher(df_dtheta))
+
+        all_fishers[main_angle] = (angles,fishers)
 
     # save this data
 
-    pickle.dump((angles,fishers), open(args.savename+"/fisher.pickle",'wb'))
+    pickle.dump(all_fishers, open(args.savename+"/fisher_MA.pickle",'wb'))
 
-    plot_fisher(angles,fishers, args.savename)
+    # plot_fisher(angles,fishers, args.savename)
 
 

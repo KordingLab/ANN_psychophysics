@@ -243,11 +243,15 @@ if __name__ == '__main__':
 
     angles = np.linspace(0,np.pi,args.n_images)
     main_angles = np.linspace(0,np.pi,args.n_angles)
-    all_fishers = {}
+    fishers_sub_deriv = {}
+    fishers_both_lines = {}
+    fishers_one_line = {}
     for main_angle in main_angles:
         if args.verbose:
             print("On main angle {}".format(main_angle))
-        fishers = []
+        sub_fishers = []
+        both_fishers=[]
+        one_fishers=[]
         for relative_angle in angles:
             # decide on the intersecting location
             centerloc = (112,112)
@@ -278,13 +282,19 @@ if __name__ == '__main__':
             df_dtheta_line = get_derivative(args.delta, plus_resp, minus_resp)
 
             # subtract the two
-            df_dtheta = df_dtheta - df_dtheta_line
+            sub_df_dtheta = df_dtheta - df_dtheta_line
 
-            fishers.append(get_fisher(df_dtheta))
+            sub_fishers.append(get_fisher(sub_df_dtheta))
+            both_fishers.append(get_fisher(df_dtheta))
+            one_fishers.append(get_fisher(df_dtheta_line))
 
-        all_fishers[main_angle] = (angles,fishers)
+        fishers_sub_deriv[main_angle] = (angles,sub_fishers)
+        fishers_both_lines[main_angle] = (angles, both_fishers)
+        fishers_one_line[main_angle] = (angles, one_fishers)
 
     # save this data
 
-    pickle.dump(all_fishers, open(args.savename+"/fisher_MA.pickle",'wb'))
+    pickle.dump(fishers_sub_deriv, open(args.savename+"/fishers_subtracted_deriv.pickle",'wb'))
+    pickle.dump(fishers_both_lines, open(args.savename + "/fishers_both_lines.pickle", 'wb'))
+    pickle.dump(fishers_one_line, open(args.savename + "/fishers_single_line.pickle", 'wb'))
 

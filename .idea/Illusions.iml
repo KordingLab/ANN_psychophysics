@@ -3,7 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/from_lines" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Local_orientation_of_cross_lines" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.7 (DNN_illusions)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

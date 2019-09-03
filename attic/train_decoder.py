@@ -6,9 +6,9 @@ import torch
 os.environ["CUDA_VISIBLE_DEVICES"]="1"
 import pickle
 
-from old_scripts_pre_lines.model import Decoder
-from old_scripts_pre_lines.data_utils import features_dataset, orientations_iterator
-from old_scripts_pre_lines.train_utils import train
+from attic.model import Decoder
+from attic.data_utils import features_dataset, orientations_iterator
+from attic.train_utils import train
 
 
 # orientation kernel size

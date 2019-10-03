@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.ndimage
 import matplotlib
+from numpy import matlib
 
 # matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
@@ -141,7 +142,7 @@ def broadband_noise(size=64, contrast=1, if_low_pass=True, center_sf=0, sf_sigma
     size_tmp = np.power(2, np.ceil(np.log2(size))).astype(int)  # then crop to intended size
     input_img = np.random.uniform(0, 1, [size_tmp, size_tmp])
     max_sf = size_tmp / 2
-    img_center = np.matlib.repmat(np.floor(size_tmp / 2), 1, 2)
+    img_center = matlib.repmat(np.floor(size_tmp / 2), 1, 2)
 
     # Fourier transform and separate magnitude and phase
     f = np.fft.fftshift(np.fft.fft2(input_img))

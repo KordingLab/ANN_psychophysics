@@ -52,38 +52,25 @@ parser.add_argument('-b', '--batch-size', default=256, type=int,
                     help='mini-batch size (default: 256), this is the total '
                          'batch size of all GPUs on the current node when '
                          'using Data Parallel or Distributed Data Parallel')
-parser.add_argument('--lr', '--learning-rate', default=0.1, type=float,
-                    metavar='LR', help='initial learning rate', dest='lr')
-parser.add_argument('--momentum', default=0.9, type=float, metavar='M',
-                    help='momentum')
-parser.add_argument('--wd', '--weight-decay', default=1e-4, type=float,
-                    metavar='W', help='weight decay (default: 1e-4)',
-                    dest='weight_decay')
-parser.add_argument('-p', '--print-freq', default=10, type=int,
-                    metavar='N', help='print frequency (default: 10)')
-parser.add_argument('--resume', default='', type=str, metavar='PATH',
-                    help='path to latest checkpoint (default: none)')
-parser.add_argument('-e', '--evaluate', dest='evaluate', action='store_true',
-                    help='evaluate model on validation set')
-parser.add_argument('--pretrained', dest='pretrained', action='store_true',
-                    help='use pre-trained model')
-parser.add_argument('--world-size', default=-1, type=int,
-                    help='number of nodes for distributed training')
-parser.add_argument('--rank', default=-1, type=int,
-                    help='node rank for distributed training')
-parser.add_argument('--dist-url', default='tcp://224.66.41.62:23456', type=str,
-                    help='url used to set up distributed training')
-parser.add_argument('--dist-backend', default='nccl', type=str,
-                    help='distributed backend')
+
 parser.add_argument('--seed', default=None, type=int,
                     help='seed for initializing training. ')
-parser.add_argument('--gpu', default=None, type=int,
+parser.add_argument('--gpu', default=0, type=int,
                     help='GPU id to use.')
 parser.add_argument('--multiprocessing-distributed', action='store_true',
                     help='Use multi-processing distributed training to launch '
                          'N processes per node, which has N GPUs. This is the '
                          'fastest way to use PyTorch for either single node or '
                          'multi node data parallel training')
+
+parser.add_argument('--rotation', default=0, type=float,
+                    help='Degrees of rotation on the input images')
+
+parser.add_argument('--n-batches', default=1000, type=int,
+                    help='Degrees of rotation on the input images')
+
+parser.add_argument('--hamming', action='store_true',
+                    help='Wether to hamming filter image')
 
 
 
@@ -105,13 +92,15 @@ def main_worker(args):
                                      std=[0.229, 0.224, 0.225])
 
     def rotate_img(img):
-        return transforms.functional.rotate(img, 45)
+        return transforms.functional.rotate(img, args.rotation)
+   
+    
 
     train_dataset = datasets.ImageFolder(
         traindir,
         transforms.Compose([
             rotate_img,
-            transforms.RandomResizedCrop(256),
+            transforms.RandomResizedCrop(224),
             transforms.RandomHorizontalFlip(),
             torchvision.transforms.Grayscale(),
             transforms.ToTensor(),
@@ -124,14 +113,8 @@ def main_worker(args):
 
     fft_getter = FFT()
 
-    # test on simulated data
-#    test_im = get_fft_simulated(fft_getter).numpy()
-#    print("Output size of fft",test_im.shape)
-
-#    np.save("test_fft_sin",np.fft.fftshift(test_im))
-
     # train for one epoch
-    get_fft(train_loader, fft_getter)
+    get_fft(train_loader, fft_getter,args)
 
 
 def get_fft_simulated(fft_getter):
@@ -148,17 +131,29 @@ def get_fft_simulated(fft_getter):
 
 
 
-def get_fft(train_loader, fft_getter):
+def get_fft(train_loader, fft_getter,args):
 
     all_ffts = []
+    
+    hamm = torch.hamming_window(224, periodic=True, alpha=0.5, beta=0.5,)
+    hamm_2d = torch.matmul(hamm[None].transpose(0,1), hamm[None]).cuda(args.gpu)
+    
     for i, (images, _) in enumerate(train_loader):
         print(i)
+        if args.hamming:
+            images = images.cuda(args.gpu) * hamm_2d
+        else:
+            images = images.cuda(args.gpu)
+        if i<1:
+            for j in range(10):
+                save_image(images[j], "unit_tests/hamming/{}.png".format(j))
+                
         # get the ftt of each grayscale image
-        mean_fft = fft_getter(images.cuda()).cpu()
+        mean_fft = fft_getter(images).cpu()
 
         all_ffts.append(mean_fft)
         np.save("ffts/mean_fft_unshifted_{}".format(i),mean_fft)
-        if i>100:
+        if i>args.n_batches:
             break
     all_mean_fft = torch.mean(torch.stack(all_ffts),dim=0)
     np.save("ffts/all_mean_fft_unshifted",all_mean_fft)

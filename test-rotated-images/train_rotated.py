@@ -10,6 +10,7 @@ import pickle
 import torch
 import torch.nn as nn
 import torch.nn.parallel
+from torch.nn import functional as F
 import torch.backends.cudnn as cudnn
 import torch.distributed as dist
 import torch.optim
@@ -22,6 +23,7 @@ import torchvision.models as models
 from torchvision.utils import save_image
 
 from fisher_calculators import get_fisher_orientations as get_fisher_now
+from Alexnet_circular import AlexNet_circular
 
 
 model_names = sorted(name for name in models.__dict__
@@ -97,6 +99,21 @@ parser.add_argument("--savename",
                         type = str,
                         default = '.')
 
+parser.add_argument('--rotation', default=0, type=float,
+                    help='Degrees of rotation on the input images')
+
+parser.add_argument('--hamming', action='store_true',
+                    help='Wether to hamming filter images')
+
+parser.add_argument('--orientation_filter', action='store_true',
+                    help='Wether to filter image by some rotation')
+
+parser.add_argument('--circular-filters', action='store_true',
+                    help='Whether to use a version of AlexNet that uses circular filters rather than rectangular')
+
+parser.add_argument('--no-cardinals', action='store_true',
+                    help='Whether apply a filter and get rid of cardinals altogether.')
+
 best_acc1 = 0
 
 
@@ -133,6 +150,7 @@ def main():
     else:
         # Simply call main_worker function
         main_worker(args.gpu, ngpus_per_node, args)
+        
 
 
 def main_worker(gpu, ngpus_per_node, args):
@@ -152,12 +170,16 @@ def main_worker(gpu, ngpus_per_node, args):
         dist.init_process_group(backend=args.dist_backend, init_method=args.dist_url,
                                 world_size=args.world_size, rank=args.rank)
     # create model
-    if args.pretrained:
+    if args.circular_filters:
+        print("=> creating AlexNet with circular Conv2d filters")
+        model = AlexNet_circular()
+    elif args.pretrained:
         print("=> using pre-trained model '{}'".format(args.arch))
         model = models.__dict__[args.arch](pretrained=True)
     else:
         print("=> creating model '{}'".format(args.arch))
         model = models.__dict__[args.arch]()
+        
 
     if args.distributed:
         # For multiprocessing distributed, DistributedDataParallel constructor
@@ -222,7 +244,9 @@ def main_worker(gpu, ngpus_per_node, args):
     
     
     def rotate_img(img):
-        return transforms.functional.rotate(img, 45)
+        return transforms.functional.rotate(img, args.rotation)
+        
+   
 
     train_dataset = datasets.ImageFolder(
         traindir,
@@ -252,6 +276,7 @@ def main_worker(gpu, ngpus_per_node, args):
             transforms.ToTensor(),
             normalize,
         ])),
+        
         batch_size=args.batch_size, shuffle=False,
         num_workers=args.workers, pin_memory=True)
 
@@ -298,6 +323,8 @@ def calculate_and_save_fisher(model,epoch,args,percent_done = 0):
 
     return fisher
 
+from scipy.io import loadmat
+
 
 def train(train_loader, model, criterion, optimizer, epoch, args):
     batch_time = AverageMeter('Time', ':6.3f')
@@ -309,7 +336,13 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
         len(train_loader),
         [batch_time, data_time, losses, top1, top5],
         prefix="Epoch: [{}]".format(epoch))
-
+    
+    if args.hamming:
+        hamm = torch.hamming_window(224, periodic=True, alpha=0.5, beta=0.5,)
+        hamm_2d = torch.matmul(hamm[None].transpose(0,1), hamm[None]).cuda(args.gpu, non_blocking=True)
+    if args.no_cardinals:
+        filt = torch.Tensor(loadmat("img_orient_filter.mat")['spatial_kernel']).expand(3,1,15,15).contiguous().cuda(args.gpu, non_blocking=True)
+    
     # switch to train mode
     model.train()
 
@@ -317,15 +350,24 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
 
     end = time.time()
     for i, (images, target) in enumerate(train_loader):
-        if i<1:
-            for j in range(10):
-                save_image(images[j], "unit_tests/rotated_imgs/{}.png".format(j))
         # measure data loading time
         data_time.update(time.time() - end)
 
         if args.gpu is not None:
             images = images.cuda(args.gpu, non_blocking=True)
-        target = target.cuda(args.gpu, non_blocking=True)
+        target = target.cuda(args.gpu, non_blocking=True)        
+            
+            
+        if args.hamming:
+            images = images * hamm_2d
+            
+        if args.no_cardinals:
+            images = F.conv2d(images,filt, padding=7, groups=3)
+            
+        if i<1:
+            for j in range(10):
+                save_image(images[j], "unit_test_img_{}.png".format(j))
+
 
         # compute output
         output = model(images)
@@ -362,6 +404,9 @@ def validate(val_loader, model, criterion, args):
         len(val_loader),
         [batch_time, losses, top1, top5],
         prefix='Test: ')
+    
+    hamm = torch.hamming_window(224, periodic=True, alpha=0.5, beta=0.5,)
+    hamm_2d = torch.matmul(hamm[None].transpose(0,1), hamm[None]).cuda(args.gpu, non_blocking=True)
 
     # switch to evaluate mode
     model.eval()
@@ -372,6 +417,9 @@ def validate(val_loader, model, criterion, args):
             if args.gpu is not None:
                 images = images.cuda(args.gpu, non_blocking=True)
             target = target.cuda(args.gpu, non_blocking=True)
+            
+            if args.hamming:
+                images = images * hamm_2d
 
             # compute output
             output = model(images)

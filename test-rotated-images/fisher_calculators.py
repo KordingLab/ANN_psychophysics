@@ -36,6 +36,9 @@ def gen_sinusoid_aperture(ratio, sz, A, omega, rho, polarity):
 
     return sin_stimuli * aperture
 
+def gen_hamming_aperature_hamming():
+    raise NotImplementedError("Lingqi!")
+
 
 def center_surround(ratio, sz, theta_center, theta_surround, A, rho):
     center = gen_sinusoid_aperture(ratio, sz, A, [torch.cos(theta_center), torch.sin(theta_center)], rho, 1)

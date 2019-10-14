@@ -106,19 +106,24 @@ def show_stimulus(I):
     plt.imshow(I.detach().numpy(), cmap=plt.gray())
     plt.show()
 
+
 ##################################################################################################
 
 
-def get_fisher_orientations(model, layer, n_angles=120, n_phases=1, delta = 1e-2):
+def get_fisher_orientations(model, layer, n_angles=120, n_images=1, delta = 1e-2, generator = None):
     """ Takes a full model (unchopped) along with a layer specification, and returns the fisher information
     with respect to orientation of that layer (averaged over phase of sine grating).
 
     Also allows choosing the finite-difference delta
 
-    :param n_images: number of phases to average over. Sampled randomly"""
+    :param n_images: number of times to call generator and do the finite difference calculation. 
+                     Averages over all derivatives to give a single Fisher.
+    :param generator: if not None, a callable image generator taking "angle" as an input.
+                      Should return a (3,224,224) Tensor showing a grating with orientation == angle.
+                      If None, uses rbg_sine_aperature"""
 
 
-    phases = np.linspace(0, np.pi, n_phases)
+    phases = np.linspace(0, np.pi, n_images)
     angles = np.linspace(0, np.pi, n_angles)
 
 
@@ -128,20 +133,23 @@ def get_fisher_orientations(model, layer, n_angles=120, n_phases=1, delta = 1e-2
         for j in range(224):
             if (i - 112) ** 2 + (j - 112) ** 2 >= 50 ** 2:
                 unit_circle[i, j] = True
-
+                
+    if generator is None:
+        generator = lambda angle: rgb_sine_aperture(torch.tensor( angle))
+                                                                 
 
     fishers_at_angle = []
     for angle in angles:
         #         print("\n angle",angle)
         """I'll put all phases in one giant tensor for faster torching"""
-        all_phases_plus = torch.zeros(n_phases ,3 ,224 ,224).cuda()
-        all_phases_minus = torch.zeros(n_phases ,3 ,224 ,224).cuda()
+        all_phases_plus = torch.zeros(n_images ,3 ,224 ,224).cuda()
+        all_phases_minus = torch.zeros(n_images ,3 ,224 ,224).cuda()
 
         for i ,phase in enumerate(phases):
 
 
-            all_phases_plus[i] = rgb_sine_aperture(torch.tensor( angle +delta))
-            all_phases_minus[i] = rgb_sine_aperture(torch.tensor( angle -delta))
+            all_phases_plus[i] = generator(angle +delta)
+            all_phases_minus[i] = generator(angle -delta)
 
         # get the response
         plus_resp = get_response(all_phases_plus, model, layer)
@@ -153,7 +161,7 @@ def get_fisher_orientations(model, layer, n_angles=120, n_phases=1, delta = 1e-2
         # get the derivative. Now working in pytorch
         df_dtheta = get_derivative(delta, plus_resp, minus_resp)
         # reshape to be in terms of examples
-        df_dtheta = df_dtheta.view(n_phases ,-1)
+        df_dtheta = df_dtheta.view(n_images ,-1)
 
         # average down
         fisher = get_fisher(df_dtheta)

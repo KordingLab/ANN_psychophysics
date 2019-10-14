@@ -73,9 +73,9 @@ def rgb_sinusoid(theta):
     return output
 
 
-def rgb_sine_aperture(theta):
+def rgb_sine_aperture(theta, freq = 1.):
     output = torch.zeros(1, 3, 224, 224)
-    sin_stim = gen_sinusoid_aperture(0.85, 224, A=1, omega=[torch.cos(theta), torch.sin(theta)], rho=0, polarity=1)
+    sin_stim = gen_sinusoid_aperture(0.85, 224, A=1, omega=[freq*torch.cos(theta), freq*torch.sin(theta)], rho=0, polarity=1)
 #     show_stimulus(sin_stim)
     for idx in range(3):
         output[0, idx, :, :] = sin_stim
@@ -106,16 +106,26 @@ def show_stimulus(I):
     plt.imshow(I.detach().numpy(), cmap=plt.gray())
     plt.show()
 
-##################################################################################################
+########################### Generators from Cheng's code ###############################################
+
+import sys
+sys.path.insert(1, '../single_patch_orientation')
+from orientation_stim import broadband_noise
+
+########################################################################################################
 
 
-def get_fisher_orientations(model, layer, n_angles=120, n_phases=1, delta = 1e-2):
+
+def get_fisher_orientations(model, layer, n_angles=120, n_phases=1, delta = 1e-2,
+                            stimulus_noise = None, freq_multiplier =1., return_example = False ):
     """ Takes a full model (unchopped) along with a layer specification, and returns the fisher information
     with respect to orientation of that layer (averaged over phase of sine grating).
 
     Also allows choosing the finite-difference delta
 
-    :param n_images: number of phases to average over. Sampled randomly"""
+    :param n_phases: number of phases to average over. Sampled uniformly.
+    :param broadband_noise: whether to use a noisy stimulus. If not None, a float. orient_sigma in Cheng's broadband_noise code.
+    :param freq_multiplier: multiply the frequency of the stimulus by this float"""
 
 
     phases = np.linspace(0, np.pi, n_phases)
@@ -128,6 +138,17 @@ def get_fisher_orientations(model, layer, n_angles=120, n_phases=1, delta = 1e-2
         for j in range(224):
             if (i - 112) ** 2 + (j - 112) ** 2 >= 50 ** 2:
                 unit_circle[i, j] = True
+                
+    # choose generating function for orientation images
+    if stimulus_noise is not None:
+        generator = lambda angle: torch.from_numpy(
+                                                   broadband_noise(size=224,  if_low_pass=True, 
+                                                   sf_sigma=10/freq_multiplier,  
+                                                   orient_sigma=stimulus_noise,
+                                                   orientation=angle )
+                                                   ).expand(1,3,224,224).contiguous()
+    else:
+        generator = lambda angle: rgb_sine_aperture(torch.tensor( angle), 1/freq_multiplier)
 
 
     fishers_at_angle = []
@@ -139,9 +160,8 @@ def get_fisher_orientations(model, layer, n_angles=120, n_phases=1, delta = 1e-2
 
         for i ,phase in enumerate(phases):
 
-
-            all_phases_plus[i] = rgb_sine_aperture(torch.tensor( angle +delta))
-            all_phases_minus[i] = rgb_sine_aperture(torch.tensor( angle -delta))
+            all_phases_plus[i] = generator( angle +delta)
+            all_phases_minus[i] = generator( angle -delta)
 
         # get the response
         plus_resp = get_response(all_phases_plus, model, layer)
@@ -159,8 +179,10 @@ def get_fisher_orientations(model, layer, n_angles=120, n_phases=1, delta = 1e-2
         fisher = get_fisher(df_dtheta)
         fishers_at_angle.append(fisher)
     # print("fisher",fisher)
-    print("response size", size)
-    return fishers_at_angle
+    if return_example:
+        return fishers_at_angle, generator(angle)
+    else:
+        return fishers_at_angle
 
 def get_derivative(delta, plus_resp, minus_resp):
     """

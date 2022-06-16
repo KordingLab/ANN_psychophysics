@@ -109,6 +109,49 @@ def show_stimulus(I):
 
 ##################################################################################################
 
+def get_fisher_hues(model, layer, n_hues=120,  delta = 1e-2, generator = None, hues=None):
+    """ Takes a full model (unchopped) along with a layer specification, and returns the fisher information with respect to hue of that layer
+
+    Also allows choosing the finite-difference delta
+
+    :param n_images: number of times to call generator and do the finite difference calculation. 
+                     Averages over all derivatives to give a single Fisher.
+    :param generator: if not None, a callable image generator taking "angle" as an input.
+                      Should return a (3,224,224) Tensor showing a grating with orientation == angle.
+                      If None, uses rbg_sine_aperature"""
+
+
+    if hues==None:
+        angles = np.linspace(0, 360, n_hues)
+    else:
+        angles=hues
+                                                                
+
+    fishers_at_angle = []
+    for angle in angles:
+        #print("\n angle",angle)
+        
+        all_phases_plus = generator(angle +delta).cuda()
+        all_phases_minus = generator(angle -delta).cuda()
+
+        # get the response
+        plus_resp = get_response(all_phases_plus, model, layer)
+
+        size = plus_resp.size()
+
+        minus_resp = get_response(all_phases_minus, model, layer)
+
+        # get the derivative. Now working in pytorch
+        df_dtheta = get_derivative(delta, plus_resp, minus_resp)
+        df_dtheta = df_dtheta.view(1,-1)
+        
+
+        # average down
+        fisher = get_fisher(df_dtheta)
+        fishers_at_angle.append(fisher)
+    # print("fisher",fisher)
+    return fishers_at_angle
+
 
 def get_fisher_orientations(model, layer, n_angles=120, n_images=1, delta = 1e-2, generator = None):
     """ Takes a full model (unchopped) along with a layer specification, and returns the fisher information
@@ -148,8 +191,8 @@ def get_fisher_orientations(model, layer, n_angles=120, n_images=1, delta = 1e-2
         for i ,phase in enumerate(phases):
 
 
-            all_phases_plus[i] = generator(angle +delta)
-            all_phases_minus[i] = generator(angle -delta)
+            all_phases_plus[i] = generator(angle +delta, spatial_phase=phase)
+            all_phases_minus[i] = generator(angle -delta,spatial_phase=phase)
 
         # get the response
         plus_resp = get_response(all_phases_plus, model, layer)
@@ -167,7 +210,7 @@ def get_fisher_orientations(model, layer, n_angles=120, n_images=1, delta = 1e-2
         fisher = get_fisher(df_dtheta)
         fishers_at_angle.append(fisher)
     # print("fisher",fisher)
-    print("response size", size)
+#     print("response size", size)
     return fishers_at_angle
 
 def get_derivative(delta, plus_resp, minus_resp):

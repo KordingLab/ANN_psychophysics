@@ -24,6 +24,7 @@ from torchvision.utils import save_image
 
 from fisher_calculators import get_fisher_orientations as get_fisher_now
 from Alexnet_circular import AlexNet_circular
+from Alexnet_nooverlap import AlexNet_nopool, AlexNet_nooverlap
 
 
 model_names = sorted(name for name in models.__dict__
@@ -114,6 +115,15 @@ parser.add_argument('--circular-filters', action='store_true',
 parser.add_argument('--no-cardinals', action='store_true',
                     help='Whether apply a filter and get rid of cardinals altogether.')
 
+parser.add_argument('--change_color', action='store_true',
+                    help='Whether apply a rotation to hues.')
+
+parser.add_argument('--no-overlap', action='store_true',
+                    help='Whether use a version of AlexNet that uses stride==kernel_size for the maxpool.')
+
+parser.add_argument('--no-pool', action='store_true',
+                    help='Whether use a version of AlexNet that, instead of pooling, uses a Conv2D layer of stride 2.')
+
 best_acc1 = 0
 
 
@@ -176,9 +186,16 @@ def main_worker(gpu, ngpus_per_node, args):
     elif args.pretrained:
         print("=> using pre-trained model '{}'".format(args.arch))
         model = models.__dict__[args.arch](pretrained=True)
+    elif args.no_overlap:
+        model = AlexNet_nooverlap()
+        print("=> creating AlexNet with kernel 2 pools")
+    elif args.no_pool:
+        model = AlexNet_nopool()
+        print("=> creating AlexNet with no pooling at all")
     else:
         print("=> creating model '{}'".format(args.arch))
         model = models.__dict__[args.arch]()
+    
         
 
     if args.distributed:
@@ -246,15 +263,21 @@ def main_worker(gpu, ngpus_per_node, args):
     def rotate_img(img):
         return transforms.functional.rotate(img, args.rotation)
         
-   
+    if args.change_color:
+        print("Changes hue!")
+        def rotate_hue(img):
+            return transforms.functional.adjust_hue(img, .25)
+    else:
+        def rotate_hue(img):
+            return img
 
     train_dataset = datasets.ImageFolder(
         traindir,
         transforms.Compose([
-            transforms.Resize(300),
+     #       rotate_hue,
+            transforms.RandomResizedCrop(224, scale=(0.08, 1.0), ratio=(1.,1.)),
             transforms.RandomHorizontalFlip(),
-            rotate_img,
-            transforms.CenterCrop(224),
+    #        rotate_img,
             transforms.ToTensor(),
             normalize,
         ]))
@@ -271,7 +294,8 @@ def main_worker(gpu, ngpus_per_node, args):
     val_loader = torch.utils.data.DataLoader(
         datasets.ImageFolder(valdir, transforms.Compose([
             transforms.Resize(256),
-            rotate_img,
+     #       rotate_hue,
+    #        rotate_img,
             transforms.CenterCrop(224),
             transforms.ToTensor(),
             normalize,
@@ -292,7 +316,7 @@ def main_worker(gpu, ngpus_per_node, args):
         adjust_learning_rate(optimizer, epoch, args)
 
         # get fisher info
-        calculate_and_save_fisher(model,epoch,args)
+        #calculate_and_save_fisher(model,epoch,args)
 
         # train for one epoch
         train(train_loader, model, criterion, optimizer, epoch, args)
@@ -312,7 +336,7 @@ def main_worker(gpu, ngpus_per_node, args):
                 'state_dict': model.state_dict(),
                 'best_acc1': best_acc1,
                 'optimizer' : optimizer.state_dict(),
-            }, is_best)
+            }, 0, filename='/data/abenjamin/DNN_illusions/{}/checkpoint_epoch_{}.pth.tar'.format(args.savename,epoch+1))
 
 
 def calculate_and_save_fisher(model,epoch,args,percent_done = 0):
@@ -391,8 +415,8 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
         if i % args.print_freq == 0:
             progress.display(i)
 
-        if i % fisher_freq == 0:
-            calculate_and_save_fisher(model,epoch,args, percent_done=i/float(len(train_loader)))
+        #if i % fisher_freq == 0:
+        #    calculate_and_save_fisher(model,epoch,args, percent_done=i/float(len(train_loader)))
 
 
 def validate(val_loader, model, criterion, args):

@@ -12,6 +12,7 @@ certifi==2021.5.30
 cffi @ file:///tmp/build/80754af9/cffi_1606255098796/work
 chardet==4.0.0
 cloudpickle==1.3.0
+colorspacious==1.1.2
 ConfigArgParse==0.14.0
 cycler==0.10.0
 dataclasses==0.7

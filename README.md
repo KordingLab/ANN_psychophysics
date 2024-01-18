@@ -1,6 +1,6 @@
 # Efficient neural codes naturally emerge through gradient descent learning
 
-This repository hosts code for "Efficient neural codes naturally emerge through gradient descent learning" available at https://www.biorxiv.org/content/10.1101/2022.05.11.491548v1.abstract.
+This repository hosts code for "Efficient neural codes naturally emerge through gradient descent learning" available at [https://www.nature.com/articles/s41467-022-35659-7](https://doi.org/10.1038/s41467-022-35659-7)
 
 This is a collaboration with the [Stocker lab](https://www.sas.upenn.edu/~astocker/lab/members-files/alan.php).
 

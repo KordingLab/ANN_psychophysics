@@ -1,0 +1,16 @@
+name: ANNPsych
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - torchaudio==0.13.1
+  - pytorch==1.13.1
+  - torchvision==0.14.1
+  - matplotlib
+  - ipykernel
+  - pandas
+  - tqdm
+  - seaborn
+  - scipy
+  - colorspacious
+  - scikit-learn

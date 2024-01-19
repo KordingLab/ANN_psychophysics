@@ -4,6 +4,9 @@ This repository hosts code for "Efficient neural codes naturally emerge through 
 
 This is a collaboration with the [Stocker lab](https://www.sas.upenn.edu/~astocker/lab/members-files/alan.php).
 
+### Local setup
+**conda env create -f environment.yml**
+
 ### Organization
 
 All subpanels for figures in the paper can be produced by running code in the appropriate notebook in `figure_notebooks`.

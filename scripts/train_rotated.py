@@ -162,7 +162,6 @@ def main():
         main_worker(args.gpu, ngpus_per_node, args)
         
 
-
 def main_worker(gpu, ngpus_per_node, args):
     global best_acc1
     args.gpu = gpu
@@ -336,14 +335,13 @@ def main_worker(gpu, ngpus_per_node, args):
                 'state_dict': model.state_dict(),
                 'best_acc1': best_acc1,
                 'optimizer' : optimizer.state_dict(),
-            }, 0, filename='/data/abenjamin/DNN_illusions/{}/checkpoint_epoch_{}.pth.tar'.format(args.savename,epoch+1))
+            }, 0, filename=f'../data/checkpoints/{args.savename}_checkpoint_epoch_{epoch+1}.pth.tar')
 
 
 def calculate_and_save_fisher(model,epoch,args,percent_done = 0):
 
     fisher =  get_fisher_now(model, args.layer, delta = args.delta)
-    # now save
-    pickle.dump(fisher, open(args.savename+"/fisher_epoch_{}.{}.pickle".format(epoch,percent_done),'wb'))
+    pickle.dump(fisher, open(f"{args.savename}_fisher_epoch_{epoch}_{percent_done}.pickle",'wb'))
 
     return fisher
 
@@ -390,7 +388,7 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
             
         if i<1:
             for j in range(10):
-                save_image(images[j], "unit_test_img_{}.png".format(j))
+                save_image(images[j], f"unit_test_img_{j}.png")
 
 
         # compute output

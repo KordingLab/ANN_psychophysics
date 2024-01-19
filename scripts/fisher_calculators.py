@@ -131,8 +131,12 @@ def get_fisher_hues(model, layer, n_hues=120,  delta = 1e-2, generator = None, h
     for angle in angles:
         #print("\n angle",angle)
         
-        all_phases_plus = generator(angle +delta).cuda()
-        all_phases_minus = generator(angle -delta).cuda()
+        if torch.cuda.is_available():
+            all_phases_plus = generator(angle +delta).cuda()
+            all_phases_minus = generator(angle -delta).cuda()
+        else: 
+            all_phases_plus = generator(angle +delta).cpu()
+            all_phases_minus = generator(angle -delta).cpu()
 
         # get the response
         plus_resp = get_response(all_phases_plus, model, layer)
@@ -185,8 +189,12 @@ def get_fisher_orientations(model, layer, n_angles=120, n_images=1, delta = 1e-2
     for angle in angles:
         #         print("\n angle",angle)
         """I'll put all phases in one giant tensor for faster torching"""
-        all_phases_plus = torch.zeros(n_images ,3 ,224 ,224).cuda()
-        all_phases_minus = torch.zeros(n_images ,3 ,224 ,224).cuda()
+        if torch.cuda.is_available():
+            all_phases_plus = torch.zeros(n_images ,3 ,224 ,224).cuda()
+            all_phases_minus = torch.zeros(n_images ,3 ,224 ,224).cuda()
+        else:
+            all_phases_plus = torch.zeros(n_images ,3 ,224 ,224).cpu()
+            all_phases_minus = torch.zeros(n_images ,3 ,224 ,224).cpu()
 
         for i ,phase in enumerate(phases):
 
@@ -260,7 +268,7 @@ def numpy_to_torch(rgb_image, cuda=True):
     >>> numpy_to_torch(np.ones((224,224,3))).size()
     torch.Size([3, 224, 224])
     """
-
+    cuda = torch.cuda.is_available()
     # rgb to bgr
     tens = torch.from_numpy(rgb_image[:, :, [2, 1, 0]])
     if cuda:
@@ -286,8 +294,12 @@ def get_response(torch_image, model, layer):
     """
 
     # preprocess image
-    mean = torch.Tensor([[[0.485]], [[0.456]], [[0.406]]]).cuda()
-    std = torch.Tensor([[[0.229]], [[0.224]], [[0.225]]]).cuda()
+    if torch.cuda.is_available():
+        mean = torch.Tensor([[[0.485]], [[0.456]], [[0.406]]]).cuda()
+        std = torch.Tensor([[[0.229]], [[0.224]], [[0.225]]]).cuda()
+    else: 
+        mean = torch.Tensor([[[0.485]], [[0.456]], [[0.406]]]).cpu()
+        std = torch.Tensor([[[0.229]], [[0.224]], [[0.225]]]).cpu()
 
     torch_image = (torch_image - mean) / std
 

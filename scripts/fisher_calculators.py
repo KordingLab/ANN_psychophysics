@@ -157,7 +157,7 @@ def get_fisher_hues(model, layer, n_hues=120,  delta = 1e-2, generator = None, h
     return fishers_at_angle
 
 
-def get_fisher_orientations(model, layer, n_angles=120, n_images=1, delta = 1e-2, generator = None):
+def get_fisher_orientations(model, layer, n_angles=120, n_images=1, delta = 1e-2, generator = None, device='cpu'):
     """ Takes a full model (unchopped) along with a layer specification, and returns the fisher information
     with respect to orientation of that layer (averaged over phase of sine grating).
 
@@ -189,12 +189,10 @@ def get_fisher_orientations(model, layer, n_angles=120, n_images=1, delta = 1e-2
     for angle in angles:
         #         print("\n angle",angle)
         """I'll put all phases in one giant tensor for faster torching"""
-        if torch.cuda.is_available():
-            all_phases_plus = torch.zeros(n_images ,3 ,224 ,224).cuda()
-            all_phases_minus = torch.zeros(n_images ,3 ,224 ,224).cuda()
-        else:
-            all_phases_plus = torch.zeros(n_images ,3 ,224 ,224).cpu()
-            all_phases_minus = torch.zeros(n_images ,3 ,224 ,224).cpu()
+  
+        all_phases_plus = torch.zeros(n_images ,3 ,224 ,224).to(device)
+        all_phases_minus = torch.zeros(n_images ,3 ,224 ,224).to(device)
+
 
         for i ,phase in enumerate(phases):
 
@@ -259,7 +257,7 @@ def get_fisher(df_dtheta):
     return fisher
 
 
-def numpy_to_torch(rgb_image, cuda=True):
+def numpy_to_torch(rgb_image, device='cpu'):
     """
     Prepares an image for passing through a pytorch network.
     :param rgb_image: Numpy tensor, shape (x,y,3)
@@ -268,13 +266,10 @@ def numpy_to_torch(rgb_image, cuda=True):
     >>> numpy_to_torch(np.ones((224,224,3))).size()
     torch.Size([3, 224, 224])
     """
-    cuda = torch.cuda.is_available()
     # rgb to bgr
     tens = torch.from_numpy(rgb_image[:, :, [2, 1, 0]])
-    if cuda:
-        r = tens.permute(2, 0, 1).float().cuda()
-    else:
-        r = tens.permute(2, 0, 1).float()
+    r = tens.permute(2, 0, 1).float().to(device)
+    
     return r
 
 

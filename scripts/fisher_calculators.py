@@ -171,7 +171,7 @@ def get_fisher_orientations(model, layer, n_angles=120, n_images=1, delta = 1e-2
 
 
     # create negative mask. This is a circle centered in the middle of radius 100 pixels
-    unit_circle = np.zeros((224, 224)).astype(np.bool)
+    unit_circle = np.zeros((224, 224)).astype(bool)
     for i in range(224):
         for j in range(224):
             if (i - 112) ** 2 + (j - 112) ** 2 >= 50 ** 2:

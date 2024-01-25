@@ -1,5 +1,7 @@
 name: ANNPsych
 channels:
+  - pytorch
+  - conda-forge
   - defaults
 dependencies:
   - python=3.8
@@ -14,3 +16,9 @@ dependencies:
   - scipy
   - colorspacious
   - scikit-learn
+  - scikit-image
+  - pip:
+      - filelock==3.13.1
+      - gdown==5.0.0
+      - packaging==23.2
+      - tornado==6.3.3

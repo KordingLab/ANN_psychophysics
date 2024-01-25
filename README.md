@@ -9,7 +9,11 @@ This is a collaboration with the [Stocker lab](https://www.sas.upenn.edu/~astock
 
 ### Organization
 
-All subpanels for figures in the paper can be produced by running code in the appropriate notebook in `figure_notebooks`.
+All subpanels for figures in the paper can be produced by running code in the appropriate notebook in `figure_notebooks`. Many figures can be run locally, but some will strictly require cuda. All notebbooks can be run on Google Colab. 
+
+### External files 
+
+Imagenet crops can be downloaded at: https://drive.usercontent.google.com/download?id=1mF46SUDKzG0LkWkNGV1fP2hTEgW5WbF_
 
 |   | Run | View |
 | - | --- | ---- |

@@ -22,3 +22,4 @@ dependencies:
       - gdown==5.0.0
       - packaging==23.2
       - tornado==6.3.3
+      - bs4

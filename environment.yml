@@ -1,0 +1,24 @@
+name: ANNPsych
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - torchaudio==0.13.1
+  - pytorch==1.13.1
+  - torchvision==0.14.1
+  - matplotlib
+  - ipykernel
+  - pandas
+  - tqdm
+  - seaborn
+  - scipy
+  - colorspacious
+  - scikit-learn
+  - scikit-image
+  - pip:
+      - filelock==3.13.1
+      - gdown==5.0.0
+      - packaging==23.2
+      - tornado==6.3.3

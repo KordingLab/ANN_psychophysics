@@ -109,7 +109,7 @@ def show_stimulus(I):
 
 ##################################################################################################
 
-def get_fisher_hues(model, layer, n_hues=120,  delta = 1e-2, generator = None, hues=None):
+def get_fisher_hues(model, layer, n_hues=120,  delta = 1e-2, generator = None, hues=None, device='cpu'):
     """ Takes a full model (unchopped) along with a layer specification, and returns the fisher information with respect to hue of that layer
 
     Also allows choosing the finite-difference delta
@@ -131,19 +131,16 @@ def get_fisher_hues(model, layer, n_hues=120,  delta = 1e-2, generator = None, h
     for angle in angles:
         #print("\n angle",angle)
         
-        if torch.cuda.is_available():
-            all_phases_plus = generator(angle +delta).cuda()
-            all_phases_minus = generator(angle -delta).cuda()
-        else: 
-            all_phases_plus = generator(angle +delta).cpu()
-            all_phases_minus = generator(angle -delta).cpu()
+        all_phases_plus = generator(angle +delta).to(device)
+        all_phases_minus = generator(angle -delta).to(device)
+
 
         # get the response
-        plus_resp = get_response(all_phases_plus, model, layer)
+        plus_resp = get_response(all_phases_plus, model, layer, device=device)
 
         size = plus_resp.size()
 
-        minus_resp = get_response(all_phases_minus, model, layer)
+        minus_resp = get_response(all_phases_minus, model, layer, device=device)
 
         # get the derivative. Now working in pytorch
         df_dtheta = get_derivative(delta, plus_resp, minus_resp)
@@ -168,7 +165,6 @@ def get_fisher_orientations(model, layer, n_angles=120, n_images=1, delta = 1e-2
     :param generator: if not None, a callable image generator taking "angle" as an input.
                       Should return a (3,224,224) Tensor showing a grating with orientation == angle.
                       If None, uses rbg_sine_aperature"""
-
 
     phases = np.linspace(0, np.pi, n_images)
     angles = np.linspace(0, np.pi, n_angles)
@@ -195,17 +191,17 @@ def get_fisher_orientations(model, layer, n_angles=120, n_images=1, delta = 1e-2
 
 
         for i ,phase in enumerate(phases):
+            
 
-
-            all_phases_plus[i] = generator(angle +delta, spatial_phase=phase)
-            all_phases_minus[i] = generator(angle -delta,spatial_phase=phase)
+            all_phases_plus[i] = generator(angle +delta)
+            all_phases_minus[i] = generator(angle -delta)
 
         # get the response
-        plus_resp = get_response(all_phases_plus, model, layer)
+        plus_resp = get_response(all_phases_plus, model, layer, device=device)
 
         size = plus_resp.size()
 
-        minus_resp = get_response(all_phases_minus, model, layer)
+        minus_resp = get_response(all_phases_minus, model, layer, device=device)
 
         # get the derivative. Now working in pytorch
         df_dtheta = get_derivative(delta, plus_resp, minus_resp)
@@ -257,7 +253,7 @@ def get_fisher(df_dtheta):
     return fisher
 
 
-def numpy_to_torch(rgb_image, device='cpu'):
+def numpy_to_torch(rgb_image, device='cuda'):
     """
     Prepares an image for passing through a pytorch network.
     :param rgb_image: Numpy tensor, shape (x,y,3)
@@ -273,7 +269,7 @@ def numpy_to_torch(rgb_image, device='cpu'):
     return r
 
 
-def get_response(torch_image, model, layer):
+def get_response(torch_image, model, layer, device='cuda'):
     """
     Gets the response of the network of the VGG at a certain layer to a single image
     NOTE: we only return the activations corresponding to the center of the image.
@@ -289,13 +285,9 @@ def get_response(torch_image, model, layer):
     """
 
     # preprocess image
-    if torch.cuda.is_available():
-        mean = torch.Tensor([[[0.485]], [[0.456]], [[0.406]]]).cuda()
-        std = torch.Tensor([[[0.229]], [[0.224]], [[0.225]]]).cuda()
-    else: 
-        mean = torch.Tensor([[[0.485]], [[0.456]], [[0.406]]]).cpu()
-        std = torch.Tensor([[[0.229]], [[0.224]], [[0.225]]]).cpu()
-
+    mean = torch.Tensor([[[0.485]], [[0.456]], [[0.406]]]).to(device)
+    std = torch.Tensor([[[0.229]], [[0.224]], [[0.225]]]).to(device)
+    
     torch_image = (torch_image - mean) / std
 
     # indexing by None adds a new axis in the beginning

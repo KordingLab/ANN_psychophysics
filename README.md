@@ -13,7 +13,7 @@ All subpanels for figures in the paper can be produced by running code in the ap
 
 ### External files 
 
-Imagenet crops can be downloaded at: https://drive.usercontent.google.com/download?id=1mF46SUDKzG0LkWkNGV1fP2hTEgW5WbF\_
+Imagenet crops can be downloaded at: <https://drive.usercontent.google.com/download?id=1mF46SUDKzG0LkWkNGV1fP2hTEgW5WbF_>
 
 |   | Run | View |
 | - | --- | ---- |
